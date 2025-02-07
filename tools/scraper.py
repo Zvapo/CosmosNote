@@ -1,16 +1,19 @@
 import os
 import json
 import asyncio
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, BrowserConfig, CacheMode
 from crawl4ai.extraction_strategy import LLMExtractionStrategy
 
-class OpenAIModelFee(BaseModel):
-    model_name: str = Field(..., description="Name of the OpenAI model.")
-    input_fee: str = Field(..., description="Fee for input token for the OpenAI model.")
-    output_fee: str = Field(
-        ..., description="Fee for output token for the OpenAI model."
-    )
+load_dotenv()
+
+class PlanetInformation(BaseModel):
+    planet_name: str = Field(..., description="Name of the planet.")
+    host_name: str = Field(..., description="Name of the planet host.")
+    orbital_period: str = Field(..., description="Orbital period of the planet.")
+    stellar_surface_gravity: str = Field(..., description="Stellar surface gravity of the planet.")
+
 
 async def extract_structured_data_using_llm(
     provider: str, api_token: str = None, extra_headers: dict[str, str] = None
@@ -34,17 +37,18 @@ async def extract_structured_data_using_llm(
         extraction_strategy=LLMExtractionStrategy(
             provider=provider,
             api_token=api_token,
-            schema=OpenAIModelFee.model_json_schema(),
+            schema=PlanetInformation.model_json_schema(),
             extraction_type="schema",
-            instruction="""From the crawled content, extract all mentioned model names along with their fees for input and output tokens. 
-            Do not miss any models in the entire content.""",
+            instruction="""From the crawled content, extract all mentioned plantes information. 
+            Get information only on first 10 planets.""",
             extra_args=extra_args,
+            verbose=True
         ),
     )
 
     async with AsyncWebCrawler(config=browser_config) as crawler:
         result = await crawler.arun(
-            url="https://openai.com/api/pricing/", config=crawler_config
+            url="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS", config=crawler_config
         )
         print(result.extracted_content)
 
@@ -52,7 +56,7 @@ if __name__ == "__main__":
     # Use ollama with llama3.3
     asyncio.run(
         extract_structured_data_using_llm(
-            provider="ollama/llama3.3", api_token="no-token"
+            provider="openai/gpt-4o", api_token=os.getenv("OPENAI_API_KEY")
         )
     )
 
