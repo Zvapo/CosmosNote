@@ -1,0 +1,1 @@
+# agent to generate a not based on the research results and the user prompt

@@ -4,7 +4,6 @@ from state import GraphState
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
-
 class GraphUtils:
     @staticmethod
     def save_graph_image(bytes_image, filename):
@@ -24,7 +23,7 @@ class Graph:
 
     def run(self):
         self.graph.invoke(
-            {"first_prompt": "Write a note about the topic of the debate."}
+            {"first_prompt": "What is the meaning of life."}
         )
 
     def save_graph_image(self):

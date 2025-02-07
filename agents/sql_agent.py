@@ -1,0 +1,1 @@
+# agent to write sql queries and query the supabase database
