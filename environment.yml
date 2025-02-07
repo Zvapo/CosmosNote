@@ -1,0 +1,21 @@
+name: cosmos-note
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pillow
+  - pip:
+    - langgraph==0.2.67
+    - langchain>=0.1.0
+    - langchain-openai>=0.0.5
+    - langchain-core>=0.1.0
+    - pydantic==2.10.6
+    - pydantic-settings>=2.1.0
+    - pydantic-ai==0.0.20
+    - typing-extensions
+    - pytest>=8.0.0
+    - black>=24.2.0
+    - python-dotenv>=1.0.0
+    - langfuse==2.57.12
