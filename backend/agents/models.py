@@ -17,3 +17,4 @@ class GraphState(BaseModel):
     user_prompt: str
     search_results: Annotated[List[str], operator.add]
     messages: List[BaseMessage]
+    note_titles: Annotated[List[str], operator.add]
