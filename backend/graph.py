@@ -4,6 +4,7 @@ from agents.models import GraphState
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode
 from agents.response_agent import orchestrator_agent
+from agents.note_agent import note_agent
 from agents.sql_agent import sql_tool
 import os
 from tools.web_search_tool import web_search_tool
@@ -14,13 +15,11 @@ class Graph:
         self.graph_builder = StateGraph(GraphState)
         
         self.graph_builder.add_node("orchestrator", orchestrator_agent)
-        
+        self.graph_builder.add_node("note_agent", note_agent)
         # Configure ToolNode with specific settings
         tools_node = ToolNode([web_search_tool, vector_search_tool, sql_tool])
-    
-            
         self.graph_builder.add_node("tools", tools_node)
-
+        
         # Define edges
         self.graph_builder.add_edge(START, "orchestrator")
         self.graph_builder.add_conditional_edges("orchestrator", self.router, ["tools", END])

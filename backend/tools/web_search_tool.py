@@ -2,7 +2,6 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 import os
 from dotenv import load_dotenv
 from langchain_core.tools import tool
-from langchain_core.messages import ToolMessage
 
 # Load environment variables
 load_dotenv()
