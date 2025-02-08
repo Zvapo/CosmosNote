@@ -34,5 +34,20 @@ document.addEventListener("nav", () => {
   // Listen for changes in prefers-color-scheme
   const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
   colorSchemeMediaQuery.addEventListener("change", themeChange)
-  window.addCleanup(() => colorSchemeMediaQuery.removeEventListener("change", themeChange))
+
+  const changeThemeHandler = (e: any) => {
+    if (e.data?.type === "changeTheme") {
+      const theme = e.data.theme
+      document.documentElement.setAttribute("saved-theme", theme)
+      localStorage.setItem("theme", theme)
+      emitThemeChangeEvent(theme)
+    }
+  }
+
+  window.addEventListener("changeTheme", changeThemeHandler)
+
+  window.addCleanup(() => {
+    window.removeEventListener("changeTheme", changeThemeHandler)
+    colorSchemeMediaQuery.removeEventListener("change", themeChange)
+  })
 })

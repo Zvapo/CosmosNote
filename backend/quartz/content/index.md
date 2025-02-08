@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to your thought map
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+Ever topic that you have resarched with your assistant will be saved here. You can check the map of your thoughts that is generated on the right panel.
