@@ -6,16 +6,12 @@ from tools.sql_agent import sql_tool
 from langchain_core.runnables.config import RunnableConfig
 from langgraph.types import Command
 from langchain_core.messages import AIMessage, SystemMessage
-
+from agents.system_prompts import SystemPrompts
 async def research_agent(state: GraphState, config: RunnableConfig):
     """
     This agent is responsible for interacting with tools and researching the query.
     """
-    system_prompt = SystemMessage(content="""
-                                  You are a helpful assistant that can search the web for information.
-                                  Utilize availabe tools to gather information. You can make maximum of 3 searches with the web_search_tool.
-                                  If you think that the information gathered is enough to anwser the prompt, reply with 'INFORMATION_GATHERED'
-                                  """)
+    system_prompt = SystemMessage(content=SystemPrompts.ResearcherAgentPrompt)
     
     tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x.tool_calls])
     

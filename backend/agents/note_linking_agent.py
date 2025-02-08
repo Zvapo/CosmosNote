@@ -1,7 +1,9 @@
 from langchain_openai import ChatOpenAI
 from agents.models import GraphState
 from tools import file_writer_tool
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, SystemMessage
+from langgraph.types import Command
+from agents.system_prompts import SystemPrompts
 
 def read_note(file_name: str):
     """
@@ -30,17 +32,8 @@ def note_linking_agent(state: GraphState):
     This agent is responsible for generating a note based on the research results and the user prompt.
     """
 
-    prompt = f"""
-    Update the note content so that it links to the existing notes. A link to a note is formatted as [[Note Title]].
-    If linking to a note would change the text of the note, use an alias [[Note Title | alias]]. You are given the list of existing note titles.
-    Do not change the content of the note, only add links. If you are unable to add a link, do not add any links.
+    prompt = SystemMessage(content=SystemPrompts.TaggingAgentPrompt)
 
-    After you have refactored the note, save it to the file using available tools.
-    
-    Existing notes: {state.existing_notes}
-    Current note:
-    {state.generated_note.content}
-    """
     errors = []
     
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
@@ -77,5 +70,9 @@ def note_linking_agent(state: GraphState):
 
         state.note_titles = [state.generated_note.name]
 
-    return { "messages": [AIMessage(content=output)] }
+    return Command(
+        update={
+            "messages": [AIMessage(content=output)]
+        }
+    )
 
