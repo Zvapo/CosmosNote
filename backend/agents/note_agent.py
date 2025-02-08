@@ -5,7 +5,7 @@ from typing import Literal
 from langchain_core.messages import AIMessage
 from langchain_openai import ChatOpenAI
 
-def note_agent(state: GraphState): # -> Command[Literal["supervisor"]]:
+def note_agent(state: GraphState):
     """
     This agent is responsible for generating a note based on the research results and the user prompt.
     """

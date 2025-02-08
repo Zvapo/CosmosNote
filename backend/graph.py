@@ -3,7 +3,7 @@ from PIL import Image
 from agents.models import GraphState
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode
-from agents.response_agent import orchestrator_agent
+from agents.orchestrator_agent import orchestrator_agent
 from agents.note_agent import note_agent
 from agents.sql_agent import sql_tool
 import os
@@ -22,8 +22,10 @@ class Graph:
         
         # Define edges
         self.graph_builder.add_edge(START, "orchestrator")
-        self.graph_builder.add_conditional_edges("orchestrator", self.router, ["tools", END])
+        self.graph_builder.add_conditional_edges("orchestrator", self.tools_router, ["tools", "note_agent"])
         self.graph_builder.add_edge("tools", "orchestrator")
+        self.graph_builder.add_edge("note_agent", "orchestrator")
+        self.graph_builder.add_edge("orchestrator", END)
         
         # Compile the graph
         self.graph = self.graph_builder.compile()
@@ -38,9 +40,10 @@ class Graph:
             
         print("Graph visualization saved to graphs_figs/graph.png")
 
-    def router(self, state: GraphState):
+    def tools_router(self, state: GraphState):
         messages = state.messages
         last_message = messages[-1]
         if last_message.tool_calls:
             return "tools"
-        return END
+        return "note_agent"
+
