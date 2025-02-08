@@ -2,7 +2,7 @@ import os
 from langchain_community.utilities import SQLDatabase
 from langchain_community.agent_toolkits import create_sql_agent
 from langchain.agents import AgentType
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langgraph.types import Command
 from typing import Literal
 from dotenv import load_dotenv
