@@ -38,7 +38,17 @@ def vector_search_tool(query: str) -> str:
     This tools job is to search the vector database with research papers about exoplanets.
     Search the vector database as a researcher would do.
     Search the vector database for key words and phrases related to the query.
-
+    Example queries:
+    -What is the main subject of the document?
+    -Which planet was discovered by TESS in this document?
+    -What type of star is TOI-197 classified as?
+    -What is the approximate radius of TOI-197?
+    -How was TOI-197.01 characterized?
+    -What is the significance of asteroseismology in this study?
+    -What is the orbital period of TOI-197.01?
+    -Which observatories provided high-resolution spectroscopy data for TOI-197?
+    -How does the redder TESS bandpass affect oscillation amplitude compared to Kepler?
+    
     Args:
         query (str): The search query to execute
         
