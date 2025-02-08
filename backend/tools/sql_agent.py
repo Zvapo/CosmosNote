@@ -13,7 +13,7 @@ from typing import Annotated
 load_dotenv()
 
 @tool
-def sql_tool(query: str, tool_call_id: Annotated[str, InjectedToolCallId]) -> str:
+def sql_tool(query: str) -> str:
     """
     Query the database using natural language.
     Input should be a natural language question about the database.
@@ -30,18 +30,5 @@ def sql_tool(query: str, tool_call_id: Annotated[str, InjectedToolCallId]) -> st
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         verbose=True
     )
-    response = agent_executor.run(query)
-    search_result = SearchResult(
-        source='SQL Database',
-        content=response
-    )
-    return Command(
-        update={
-            "messages": [ToolMessage(
-                content=search_result.content, 
-                tool_call_id=tool_call_id
-            )],
-            "search_results": [search_result]
-        }
-    )
+    return agent_executor.run(query)
 
