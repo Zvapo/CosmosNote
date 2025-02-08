@@ -11,8 +11,9 @@ def note_agent(state: GraphState, config: RunnableConfig):
                                   """)
     
     messages = state["messages"]
-    messages[0] = system_prompt
-    response = llm.with_structured_output(Note).invoke(messages) 
+    call_messages = messages.copy() # do not save the system prompt in the state
+    call_messages[0] = system_prompt
+    response = llm.with_structured_output(Note).invoke(call_messages) 
     return Command(
         update={
             "generated_note": response

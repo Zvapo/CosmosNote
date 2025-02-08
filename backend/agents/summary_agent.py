@@ -12,9 +12,10 @@ async def summary_agent(state: GraphState, config: RunnableConfig):
                                   You are a helpful assistant that can summarize the research results and the flow of the application.
                                   """)
     messages = state["messages"]
-    messages[0] = system_prompt
+    call_messages = messages.copy() # do not save the system prompt in the state
+    call_messages[0] = system_prompt
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-    response = llm.invoke(messages)
+    response = llm.invoke(call_messages)
     return Command(
         update={
             "messages": [response]
