@@ -8,13 +8,13 @@ class ChatMessage(BaseModel):
     content: str # message content
     timestamp: str = str(datetime.now().isoformat()) 
 
-class GraphState(BaseModel):
-    conversation_history: Annotated[List[ChatMessage], operator.add]
-    user_prompt: str
-    generated_note: str
-
 class Note(BaseModel):
     title: str
     content: str
     tags: List[str]
     # follow_up_questions: List[str]
+
+class GraphState(BaseModel):
+    conversation_history: Annotated[List[ChatMessage], operator.add]
+    user_prompt: str
+    generated_note: Note
