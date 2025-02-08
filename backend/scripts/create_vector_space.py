@@ -3,8 +3,8 @@ import numpy as np
 import os
 from sentence_transformers import SentenceTransformer
 
-# --- Ładowanie poprawnego modelu (384 wymiary) ---
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+# --- Ładowanie poprawnego modelu (768 wymiary) ---
+MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
 model = SentenceTransformer(MODEL_NAME)
 
 # --- Połączenie z bazą danych ---
@@ -46,7 +46,7 @@ for file in files:
         print(f"⚠️ Plik jest pusty: {file_path}")
         continue
 
-    vector = model.encode(text)  # ✅ Generuje poprawny wymiar (384,)
+    vector = model.encode(text)  # ✅ Generuje poprawny wymiar (768,)
     vector_blob = vector.tobytes()  # Konwersja do formatu BLOB
     
     cursor.execute("INSERT INTO document_vectors (filename, text_snippet, vector) VALUES (?, ?, ?)",
@@ -55,4 +55,4 @@ for file in files:
 conn.commit()
 conn.close()
 
-print("✅ Nowe wektory (384D) zapisane do SQLite!")
+print("✅ Nowe wektory (768D) zapisane do SQLite!")
