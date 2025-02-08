@@ -1,12 +1,9 @@
-from typing import TypedDict, List, Annotated, Optional
+from typing import List, Annotated, Dict
 from pydantic import BaseModel
 import operator
 from datetime import datetime
+from langchain_core.messages import BaseMessage
 
-class ChatMessage(BaseModel):
-    role: str # either user or agent
-    content: str # message content
-    timestamp: str = str(datetime.now().isoformat()) 
 
 class Note(BaseModel):
     title: str
@@ -14,7 +11,9 @@ class Note(BaseModel):
     tags: List[str]
     # follow_up_questions: List[str]
 
+
+# custom state graph inherits from the state graph class
 class GraphState(BaseModel):
-    conversation_history: Annotated[List[ChatMessage], operator.add]
     user_prompt: str
-    generated_note: Note
+    search_results: Annotated[List[str], operator.add]
+    messages: List[BaseMessage]

@@ -1,33 +1,24 @@
-from datetime import datetime
-from agents.models import GraphState, ChatMessage
+from agents.models import GraphState
 from langchain_openai import ChatOpenAI
 from tools.web_search_tool import web_search_tool
 from tools.vector_search_tool import vector_search_tool
-from typing import Literal
-from langgraph.types import Command
+from agents.sql_agent import sql_tool
 
-async def orchestrator_agent(state: GraphState) -> Command[Literal["sql_agent", "web_search_node", "vector_search_node"]]: # vector search tool, note making agent
+async def orchestrator_agent(state: GraphState):
     """
-    This agent is responsible for replying to user prompt.
-    This agent can use web search to find current information.
+    This agent orchestrates the flow and has access to all tools.
+    Available tools:
+    1. web_search_tool: Search the web for current information
+    2. vector_search_tool: Search vector database for similar content
+    3. sql_tool: Query the SQL database
     """
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-    tools = [web_search_tool, vector_search_tool] # add vector db tool, search tool
-    llm.bind_tools(tools) # interface for the agent to know what tools are available
-    
-    user_message = state.user_prompt
-    response = await llm.invoke(user_message)
-    
-    response_message = ChatMessage(
-        role="assistant",
-        content=str(response),
-        timestamp=datetime.now().isoformat()
-    )
-    
-    return {
-        "conversation_history": [response_message],
-        "user_prompt": state.user_prompt
-    }
+    llm = ChatOpenAI(model="gpt-4", temperature=0)
+    # Make all tools available to the agent
+    tools = [web_search_tool, vector_search_tool, sql_tool]
+    llm_w_tools = llm.bind_tools(tools)
+
+    response = await llm_w_tools.ainvoke(state.messages[-1].content)
+    return {"messages": [response]}
 
 
 
