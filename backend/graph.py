@@ -33,7 +33,7 @@ class Graph:
         
         # Compile the graph
         self.graph = self.graph_builder.compile()
-
+    
 
     def save_graph_image(self):
         os.makedirs("graphs_figs", exist_ok=True)
@@ -61,15 +61,10 @@ class Graph:
                 yield event
 
 
-    def tools_router(self, state: GraphState):
-        messages = state.messages
+    def tools_router(self, state: GraphState) -> str:
+        messages = state["messages"]
         last_message = messages[-1]
-        print("state")
-        print(state)
-        if last_message.tool_calls:
-            return "tools"
-        elif last_message.content == "INFORMATION GATHERED":
+        if last_message.content == 'INFORMATION_GATHERED':
             return "note_agent"
-        else:
-            return "summary_agent"
+        return "tools"
 

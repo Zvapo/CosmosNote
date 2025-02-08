@@ -68,5 +68,5 @@ coverage.xml
 *.log
 *.sqlite
 
-vectors.db
-downloaded_pdfs
+vectors*.db
+downloaded_pdfs*

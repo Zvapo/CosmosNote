@@ -2,6 +2,12 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 import os
 from dotenv import load_dotenv
 from langchain_core.tools import tool
+from langchain_core.tools import InjectedToolCallId
+from typing import Annotated
+from agents.models import SearchResult
+from langchain_core.messages import ToolMessage
+from langgraph.types import Command
+
 
 # Load environment variables
 load_dotenv()
@@ -13,7 +19,7 @@ if not tavily_api_key:
 
 @tool
 def web_search_tool(query: str):
-    """
+    """ 
     Search the web for current information using Tavily API.
     
     Args:
@@ -22,12 +28,11 @@ def web_search_tool(query: str):
     Returns:
         dict: Search results containing relevant information from the web
     """
-    print('HELLO FROM WEB SEARCH TOOL')
     web_search_tool = TavilySearchResults(
         tavily_api_key=tavily_api_key,
-        max_results=2,
+        max_results=1,
         include_raw_content=True,
         include_images=False
     )
-    response = web_search_tool.invoke(query)
-    return response
+
+    return web_search_tool.invoke(query)
