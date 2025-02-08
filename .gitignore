@@ -67,3 +67,6 @@ coverage.xml
 # Logs and databases
 *.log
 *.sqlite
+
+vectors.db
+downloaded_pdfs
