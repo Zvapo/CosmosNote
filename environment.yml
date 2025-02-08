@@ -20,3 +20,4 @@ dependencies:
     - python-dotenv>=1.0.0
     - langfuse==2.57.12
     - tavily-api==1.0.0
+    - python-dotenv>=1.0.0
