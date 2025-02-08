@@ -1,0 +1,103 @@
+-- -- Drop table if it exists
+-- DROP TABLE IF EXISTS exoplanets;
+
+-- -- Create the exoplanets table with detailed comments
+-- CREATE TABLE exoplanets (
+--     id SERIAL PRIMARY KEY, -- Unique identifier for each exoplanet entry
+--     pl_name TEXT, -- Planet Name
+--     hostname TEXT, -- Host Star Name
+--     default_flag BOOLEAN, -- Indicates if this is the default parameter set for the planet
+--     sy_snum NUMERIC NULL, -- Number of Stars in the System
+--     sy_pnum NUMERIC NULL, -- Number of Planets in the System
+--     discoverymethod TEXT NULL, -- Discovery Method used to detect the planet
+--     disc_year NUMERIC NULL, -- Year the planet was discovered
+--     disc_facility TEXT NULL, -- Facility or telescope used for discovery
+--     soltype TEXT NULL, -- Solution Type (e.g., Confirmed, Candidate)
+--     pl_controv_flag BOOLEAN NULL, -- Flag indicating if the planet is controversial
+--     pl_refname TEXT NULL, -- Reference for planetary parameters
+--     pl_orbper NUMERIC NULL, -- Orbital Period [days]
+--     pl_orbpererr1 NUMERIC NULL, -- Orbital Period Upper Uncertainty [days]
+--     pl_orbpererr2 NUMERIC NULL, -- Orbital Period Lower Uncertainty [days]
+--     pl_orbperlim NUMERIC NULL, -- Orbital Period Limit Flag
+--     pl_orbsmax NUMERIC NULL, -- Orbit Semi-Major Axis [AU]
+--     pl_orbsmaxerr1 NUMERIC NULL, -- Orbit Semi-Major Axis Upper Uncertainty [AU]
+--     pl_orbsmaxerr2 NUMERIC NULL, -- Orbit Semi-Major Axis Lower Uncertainty [AU]
+--     pl_orbsmaxlim NUMERIC NULL, -- Orbit Semi-Major Axis Limit Flag
+--     pl_rade NUMERIC NULL, -- Planet Radius [Earth Radius]
+--     pl_radeerr1 NUMERIC NULL, -- Planet Radius Upper Uncertainty [Earth Radius]
+--     pl_radeerr2 NUMERIC NULL, -- Planet Radius Lower Uncertainty [Earth Radius]
+--     pl_radelim NUMERIC NULL, -- Planet Radius Limit Flag
+--     pl_radj NUMERIC NULL, -- Planet Radius [Jupiter Radius]
+--     pl_radjerr1 NUMERIC NULL, -- Planet Radius Upper Uncertainty [Jupiter Radius]
+--     pl_radjerr2 NUMERIC NULL, -- Planet Radius Lower Uncertainty [Jupiter Radius]
+--     pl_radjlim NUMERIC NULL, -- Planet Radius Limit Flag
+--     pl_bmasse NUMERIC NULL, -- Planet Mass or Mass*sin(i) [Earth Mass]
+--     pl_bmasseerr1 NUMERIC NULL, -- Planet Mass Upper Uncertainty [Earth Mass]
+--     pl_bmasseerr2 NUMERIC NULL, -- Planet Mass Lower Uncertainty [Earth Mass]
+--     pl_bmasselim NUMERIC NULL, -- Planet Mass Limit Flag
+--     pl_bmassj NUMERIC NULL, -- Planet Mass or Mass*sin(i) [Jupiter Mass]
+--     pl_bmassjerr1 NUMERIC NULL, -- Planet Mass Upper Uncertainty [Jupiter Mass]
+--     pl_bmassjerr2 NUMERIC NULL, -- Planet Mass Lower Uncertainty [Jupiter Mass]
+--     pl_bmassjlim NUMERIC NULL, -- Planet Mass Limit Flag
+--     pl_bmassprov TEXT NULL, -- Provenance of Mass Measurement
+--     pl_orbeccen NUMERIC NULL, -- Orbital Eccentricity
+--     pl_orbeccenerr1 NUMERIC NULL, -- Orbital Eccentricity Upper Uncertainty
+--     pl_orbeccenerr2 NUMERIC NULL, -- Orbital Eccentricity Lower Uncertainty
+--     pl_orbeccenlim NUMERIC NULL, -- Orbital Eccentricity Limit Flag
+--     pl_insol NUMERIC NULL, -- Insolation Flux [Earth Flux]
+--     pl_insolerr1 NUMERIC NULL, -- Insolation Flux Upper Uncertainty [Earth Flux]
+--     pl_insolerr2 NUMERIC NULL, -- Insolation Flux Lower Uncertainty [Earth Flux]
+--     pl_insollim NUMERIC NULL, -- Insolation Flux Limit Flag
+--     pl_eqt NUMERIC NULL, -- Equilibrium Temperature [K]
+--     pl_eqterr1 NUMERIC NULL, -- Equilibrium Temperature Upper Uncertainty [K]
+--     pl_eqterr2 NUMERIC NULL, -- Equilibrium Temperature Lower Uncertainty [K]
+--     pl_eqtlim NUMERIC NULL, -- Equilibrium Temperature Limit Flag
+--     ttv_flag BOOLEAN NULL, -- Flag for Transit Timing Variations
+--     st_refname TEXT NULL, -- Stellar Parameter Reference
+--     st_spectype TEXT NULL, -- Spectral Type of Host Star
+--     st_teff NUMERIC NULL, -- Stellar Effective Temperature [K]
+--     st_tefferr1 NUMERIC NULL, -- Stellar Effective Temperature Upper Uncertainty [K]
+--     st_tefferr2 NUMERIC NULL, -- Stellar Effective Temperature Lower Uncertainty [K]
+--     st_tefflim NUMERIC NULL, -- Stellar Effective Temperature Limit Flag
+--     st_rad NUMERIC NULL, -- Stellar Radius [Solar Radius]
+--     st_raderr1 NUMERIC NULL, -- Stellar Radius Upper Uncertainty [Solar Radius]
+--     st_raderr2 NUMERIC NULL, -- Stellar Radius Lower Uncertainty [Solar Radius]
+--     st_radlim NUMERIC NULL, -- Stellar Radius Limit Flag
+--     st_mass NUMERIC NULL, -- Stellar Mass [Solar Mass]
+--     st_masserr1 NUMERIC NULL, -- Stellar Mass Upper Uncertainty [Solar Mass]
+--     st_masserr2 NUMERIC NULL, -- Stellar Mass Lower Uncertainty [Solar Mass]
+--     st_masslim NUMERIC NULL, -- Stellar Mass Limit Flag
+--     st_met NUMERIC NULL, -- Stellar Metallicity [dex]
+--     st_meterr1 NUMERIC NULL, -- Stellar Metallicity Upper Uncertainty [dex]
+--     st_meterr2 NUMERIC NULL, -- Stellar Metallicity Lower Uncertainty [dex]
+--     st_metlim NUMERIC NULL, -- Stellar Metallicity Limit Flag
+--     st_metratio TEXT NULL, -- Stellar Metallicity Ratio
+--     st_logg NUMERIC NULL, -- Stellar Surface Gravity [log10(cm/s**2)]
+--     st_loggerr1 NUMERIC NULL, -- Stellar Surface Gravity Upper Uncertainty [log10(cm/s**2)]
+--     st_loggerr2 NUMERIC NULL, -- Stellar Surface Gravity Lower Uncertainty [log10(cm/s**2)]
+--     st_logglim NUMERIC NULL, -- Stellar Surface Gravity Limit Flag
+--     sy_refname TEXT NULL, -- System Parameter Reference
+--     rastr TEXT NULL, -- Right Ascension [Sexagesimal]
+--     ra NUMERIC NULL, -- Right Ascension [Degrees]
+--     decstr TEXT NULL, -- Declination [Sexagesimal]
+--     dec NUMERIC NULL, -- Declination [Degrees]
+--     sy_dist NUMERIC NULL, -- Distance to System [Parsecs]
+--     sy_disterr1 NUMERIC NULL, -- Distance Upper Uncertainty [Parsecs]
+--     sy_disterr2 NUMERIC NULL, -- Distance Lower Uncertainty [Parsecs]
+--     sy_vmag NUMERIC NULL, -- V (Johnson) Magnitude
+--     sy_vmagerr1 NUMERIC NULL, -- V Magnitude Upper Uncertainty
+--     sy_vmagerr2 NUMERIC NULL, -- V Magnitude Lower Uncertainty
+--     sy_kmag NUMERIC NULL, -- Ks (2MASS) Magnitude
+--     sy_kmagerr1 NUMERIC NULL, -- Ks Magnitude Upper Uncertainty
+--     sy_kmagerr2 NUMERIC NULL, -- Ks Magnitude Lower Uncertainty
+--     sy_gaiamag NUMERIC NULL, -- Gaia Magnitude
+--     sy_gaiamagerr1 NUMERIC NULL, -- Gaia Magnitude Upper Uncertainty
+--     sy_gaiamagerr2 NUMERIC NULL, -- Gaia Magnitude Lower Uncertainty
+--     rowupdate DATE NULL, -- Date of Last Update
+--     pl_pubdate DATE NULL, -- Planetary Parameter Reference Publication Date
+--     releasedate DATE NULL -- Release Date
+-- );
+-- psql -U $(whoami) -d exoplanets -f exoplanets.sql
+
+SELECT pl_refname FROM exoplanets;
+where disc_facility like '%TESS%';
