@@ -11,6 +11,3 @@ def file_writer_tool(file_name: str, content: str):
         return f"File {file_name}.md written successfully."
     except Exception as e:
         return f"Error writing file {file_name}.md: {e}"
-    
-
-print(file_writer_tool.invoke({ "file_name": "test", "content": "Hello, world!" }))
