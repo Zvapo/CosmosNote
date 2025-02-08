@@ -11,7 +11,7 @@ from agents.models import GraphState
 load_dotenv()
 
 
-def sql_agent(state: GraphState) -> Command[Literal["supervisor"]]:
+def sql_agent(state: GraphState) -> Command[Literal["orchestrator_agent"]]:
     """
     This agent is responsible for querying the database.
     """
