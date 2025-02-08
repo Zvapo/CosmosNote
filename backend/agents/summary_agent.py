@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.runnables.config import RunnableConfig
 from langgraph.types import Command
 from langchain_core.messages import SystemMessage
+from langchain_core.messages import SystemMessage
 
 async def summary_agent(state: GraphState, config: RunnableConfig):
     """

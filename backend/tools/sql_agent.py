@@ -17,6 +17,9 @@ def sql_tool(query: str) -> str:
     """
     Query the database using natural language.
     Input should be a natural language question about the database.
+    Your queries should follow the reasoning process of a human.
+    This tool is used to search the database for information about exoplanets properties.
+    The database contains information about exoplanets properties, such as the name, distance, mass, radius, etc.
     """
     print('HELLO FROM SQL TOOL')
     DB_URI = os.getenv("DB_URI")

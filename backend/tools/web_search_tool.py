@@ -20,14 +20,17 @@ if not tavily_api_key:
 @tool
 def web_search_tool(query: str):
     """ 
-    Search the web for current information using Tavily API.
-    
+    Search the web for current information using Tavily API. 
+    Search the web as a researcher would do.
+    Ask follow up questions to get a better understanding of the query.
+
     Args:
         query (str): The search query to execute
         
     Returns:
         dict: Search results containing relevant information from the web
     """
+    print('HELLO FROM WEB SEARCH TOOL')
     web_search_tool = TavilySearchResults(
         tavily_api_key=tavily_api_key,
         max_results=1,

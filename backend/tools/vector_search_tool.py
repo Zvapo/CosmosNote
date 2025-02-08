@@ -35,8 +35,10 @@ vector_store = SupabaseVectorStore(
 @tool
 def vector_search_tool(query: str) -> str:
     """
-    Search the vector database with research papers about exoplanets.
-    
+    This tools job is to search the vector database with research papers about exoplanets.
+    Search the vector database as a researcher would do.
+    Search the vector database for key words and phrases related to the query.
+
     Args:
         query (str): The search query to execute
         
