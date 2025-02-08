@@ -2,31 +2,32 @@ from io import BytesIO
 from PIL import Image
 from agents.models import GraphState
 from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver
-from agents.response_agent import agent_0
+from agents.response_agent import response_agent
+from agents.sql_agent import sql_agent
 import os
-
-class GraphUtils:
-    @staticmethod
-    def save_graph_image(bytes_image, filename):
-        buffer = BytesIO(bytes_image)
-        
-        with Image.open(buffer) as img:
-            img.save(filename)
-
+from tools.web_search import web_search_tool
 
 class Graph:
     def __init__(self):
         self.graph_builder = StateGraph(GraphState)
-        self.graph_builder.add_node("agent_0", agent_0)
-        self.graph_builder.set_entry_point("agent_0")
-        self.graph_builder.add_edge("agent_0", END)
+        self.graph_builder.add_node("response_agent", response_agent)
+        self.graph_builder.add_node("sql_agent", sql_agent)
         
-        # Compile without checkpointer
+        self.graph_builder.set_entry_point("response_agent")
+        self.graph_builder.add_edge("response_agent", END)
+        
+        # Compile with async config
         self.graph = self.graph_builder.compile()
 
     def save_graph_image(self):
+        """
+        Saves a visualization of the graph structure to a PNG file.
+        """
         os.makedirs("graphs_figs", exist_ok=True)
-        buffer = BytesIO(self.graph.draw_mermaid_png())
+        graph_bytes = self.graph.get_graph().draw_mermaid_png()
+        
+        buffer = BytesIO(graph_bytes)
         with Image.open(buffer) as img:
             img.save("graphs_figs/graph.png")
+            
+        print("Graph visualization saved to graphs_figs/graph.png")

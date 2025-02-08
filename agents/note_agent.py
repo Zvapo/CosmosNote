@@ -1,5 +1,5 @@
 from datetime import datetime
-from agents.models import ChatMessage, GraphState
+from agents.models import ChatMessage, GraphState, Note
 from langgraph.types import Command
 from typing import Literal
 from langchain_openai import ChatOpenAI
@@ -16,6 +16,6 @@ def note_agent(state: GraphState) -> Command[Literal["supervisor"]]:
     
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
 
-    response = llm.invoke(prompt)
+    response = llm.with_structured_output(Note).invoke(prompt)
 
     return { "generated_note": response, "conversation_history": [ChatMessage(role="assistant", content="The note was generated successfully ansd saved to the state.", timestamp=datetime.now().isoformat())] }

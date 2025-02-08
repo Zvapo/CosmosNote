@@ -13,6 +13,8 @@ class GraphState(BaseModel):
     user_prompt: str
     generated_note: str
 
-class Agent0Response(BaseModel):
-    response: str
-    
+class Note(BaseModel):
+    title: str
+    content: str
+    tags: List[str]
+    # follow_up_questions: List[str]
