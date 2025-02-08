@@ -1,7 +1,7 @@
 import os
 import getpass
 from dotenv import load_dotenv
-from graph import Graph
+from backend.graph import Graph
 import asyncio
 from agents.models import GraphState, ChatMessage
 from datetime import datetime

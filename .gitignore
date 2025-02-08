@@ -1,3 +1,7 @@
+# JavaScript
+*node_modules/
+backend/quartz/docs/
+
 # Python
 __pycache__/
 *.py[cod]
