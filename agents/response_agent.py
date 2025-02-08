@@ -1,54 +1,35 @@
 from datetime import datetime
+from agents.models import GraphState, ChatMessage
+from langchain_openai import ChatOpenAI
+from tools.web_search import web_search_tool
 from typing import Literal
 from langgraph.types import Command
-from pydantic_ai import Agent
-from agents.__init__ import AgentDeps
-from agents.models import GraphState, ChatMessage
-# from agents.sql_agent import sql_agent
-import os
-from dotenv import load_dotenv
-import json
 
-# Load environment variables
-load_dotenv()
-
-def format_conversation_history(state: GraphState):
-    '''
-    Helper function for formatting the conversation history.
-    This message history can be passed to Agent 0 as context.
-    '''
-    conversation_history = ["{message.role} says {message.content}" for message in state.conversation_history]
-    return "\n".join(conversation_history)
-
-async def agent_0(state: GraphState):
+async def response_agent(state: GraphState) -> Command[Literal["my_other_node"]]:
     """
     This agent is responsible for replying to user prompt.
-    This agent can use the following tools:
-    - web_search
-    - redirect to SQL agent
-    - call to a vector database
-
-    This agent will return a response to the user and to the Obsidian Note Agent.
+    This agent can use web search to find current information.
     """
-    topic_agent = Agent(
-        model="gpt-4o-mini",
-        system_prompt="You are a helpful AI assistant. Respond to the user's prompt.",
-        result_type=str,
-    )
-
-    run_result = await topic_agent.run(state.user_prompt)
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    tools = [web_search_tool] # add search tool
+    llm.bind_tools(tools)
     
-    # Extract response from the RunResult object
-    # The response should be in the first text part of the response
-    response_text = run_result._all_messages[1].parts[0].content
+    user_message = state.user_prompt
+    response = await llm.invoke(user_message)
     
-    response_object = ChatMessage(
-        role="agent", 
-        content=response_text,
+    response_message = ChatMessage(
+        role="assistant",
+        content=str(response),
         timestamp=datetime.now().isoformat()
     )
-
-    return {"conversation_history": [response_object]}
+    
+    return Command(
+        "my_other_node",
+        {
+            "conversation_history": [response_message],
+            "user_prompt": state.user_prompt
+        }
+    )
 
 
 
