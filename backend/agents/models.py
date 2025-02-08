@@ -17,3 +17,4 @@ class GraphState(BaseModel):
     search_results: Annotated[List[str], operator.add]
     messages: List[BaseMessage]
     generated_note: Optional[Note] = None
+    research_results: Optional[List[str]] = None

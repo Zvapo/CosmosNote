@@ -14,6 +14,7 @@ def sql_tool(query: str) -> str:
     Query the database using natural language.
     Input should be a natural language question about the database.
     """
+    print('HELLO FROM SQL TOOL')
     DB_URI = os.getenv("DB_URI")
     db = SQLDatabase.from_uri(DB_URI)
     
