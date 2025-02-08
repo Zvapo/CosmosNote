@@ -1,3 +1,0 @@
-class GraphState:
-    topic: str
-    
