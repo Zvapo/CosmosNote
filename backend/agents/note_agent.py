@@ -8,7 +8,7 @@ def note_agent(state: GraphState):
     """
     prompt = f"""
     Generate a note based on the research results and the user prompt. The note should be in the format of a markdown file.
-    Research results: {state.conversation_history}
+    Research results: {state.research_results}
     User prompt: {state.user_prompt}
     """
     
