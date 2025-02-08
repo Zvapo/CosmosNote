@@ -1,9 +1,6 @@
-from datetime import datetime
 from agents.models import GraphState, Note
-from langgraph.types import Command
-from typing import Literal
-from langchain_core.messages import AIMessage
 from langchain_openai import ChatOpenAI
+from langchain_core.messages import AIMessage
 
 def note_agent(state: GraphState):
     """

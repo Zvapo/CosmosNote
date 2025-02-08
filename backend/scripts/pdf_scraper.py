@@ -4,13 +4,14 @@ from bs4 import BeautifulSoup
 import os
 import random
 import time
+from tqdm import tqdm
 
 # --- DATABASE CONFIG ---
-DB_NAME = "exoplanets"
-DB_USER = os.getenv("USER")  # Uses your macOS username
-DB_PASSWORD = ""  # Leave blank if no password
-DB_HOST = "localhost"
-DB_PORT = "5432"
+DB_NAME = "postgres"
+DB_USER = "postgres.ezlovmsmtdengapiohfz"   # Uses your macOS username
+DB_PASSWORD = "Kepler-LOL42_GasGiant!"  # If PostgreSQL has no password, leave blank
+DB_HOST = "aws-0-eu-central-1.pooler.supabase.com"
+DB_PORT = "6543"
 
 # --- CONNECT TO DATABASE ---
 print("🔗 Connecting to PostgreSQL...")
@@ -26,7 +27,6 @@ cursor.execute("""
     FROM exoplanets
     WHERE disc_facility ILIKE '%Transiting Exoplanet Survey Satellite (TESS)%'
     AND default_flag = true
-    LIMIT 10;
 """)
 rows = cursor.fetchall()
 
@@ -98,13 +98,18 @@ def get_arxiv_reference(url):
 print("🔗 Extracting reference links...")
 arxiv_references = {}
 
-for row in rows:
+for row in tqdm(rows[397:], desc="Processing references"):
     raw_html = row[0]  # The pl_refname column contains HTML
     link = extract_link(raw_html)
     print(link)
 
     if link and link.startswith("http"):  # Ensure it's a valid URL
-        arxiv_references[link] = get_arxiv_reference(link)
+        ref = get_arxiv_reference(link)
+        arxiv_references[link] = ref
+
+        # Append to file immediately
+        with open("arxiv_references.txt", "a") as f:
+            f.write(f"{ref}\n")
 
 
 # --- PRINT RESULTS ---
@@ -113,11 +118,11 @@ for row in rows:
 #     print(f"{link} → {ref}")
 
 # Optionally, save results to a file
-with open("arxiv_references.txt", "w") as f:
-    for link, ref in arxiv_references.items():
-        f.write(f"{ref}\n")
+# with open("arxiv_references.txt", "w") as f:
+#     for link, ref in arxiv_references.items():
+#         f.write(f"{ref}\n")
 
-print("\n📁 Saved results to arxiv_references.txt")
+# print("\n📁 Saved results to arxiv_references.txt")
 
 # --- TEST FUNCTIONS ---
 # test = get_arxiv_reference("https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract")

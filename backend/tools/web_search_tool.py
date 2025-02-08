@@ -22,6 +22,7 @@ def web_search_tool(query: str):
     Returns:
         dict: Search results containing relevant information from the web
     """
+    print('HELLO FROM WEB SEARCH TOOL')
     web_search_tool = TavilySearchResults(
         tavily_api_key=tavily_api_key,
         max_results=2,

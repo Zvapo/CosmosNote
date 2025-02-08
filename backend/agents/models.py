@@ -1,4 +1,4 @@
-from typing import List, Annotated, Dict
+from typing import List, Annotated, Dict, Optional
 from pydantic import BaseModel
 import operator
 from datetime import datetime
@@ -9,7 +9,6 @@ class Note(BaseModel):
     title: str
     content: str
     tags: List[str]
-    # follow_up_questions: List[str]
 
 
 # custom state graph inherits from the state graph class
@@ -18,3 +17,5 @@ class GraphState(BaseModel):
     search_results: Annotated[List[str], operator.add]
     messages: List[BaseMessage]
     note_titles: Annotated[List[str], operator.add]
+    generated_note: Optional[Note] = None
+    research_results: Optional[List[str]] = None

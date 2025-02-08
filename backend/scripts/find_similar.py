@@ -3,7 +3,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 
 # --- Model do enkodowania zapytań ---
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
 model = SentenceTransformer(MODEL_NAME)
 
 # --- Połączenie z bazą SQLite ---
@@ -12,7 +12,7 @@ DB_PATH = "vectors.db"
 def find_similar(query, top_n=5):
     """Znajduje najbliższe dokumenty dla podanego zapytania"""
     
-    # 🔹 Enkodowanie zapytania do wektora (384D)
+    # 🔹 Enkodowanie zapytania do wektora (768D)
     query_vector = model.encode(query)
 
     # 🔹 Połączenie z bazą
