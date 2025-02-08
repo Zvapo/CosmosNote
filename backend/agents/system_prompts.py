@@ -56,7 +56,7 @@ class SystemPrompts:
             Tagging Agent (Your Role): Tags the note and stores it in the database.
             Response Agent: Uses the note to answer the user's question and generate three follow-up questions.
     """
-    ResponseAgentPrompt = """
+    SummaryAgentPrompt = """
         You are the Researcher Agent in a multi-agent AI system dedicated to answering user questions about habitable planets in the universe.
         System Workflow Overview
             User Query: The user asks a question about habitable planets.

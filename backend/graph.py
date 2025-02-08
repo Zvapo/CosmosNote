@@ -10,6 +10,7 @@ from tools.sql_agent import sql_tool
 from agents.research_agent import research_agent
 from tools.web_search_tool import web_search_tool
 from tools.vector_search_tool import vector_search_tool
+from agents.note_linking_agent import note_linking_agent
 from langchain_core.messages import HumanMessage
 
 class Graph:
@@ -21,6 +22,7 @@ class Graph:
         self.graph_builder.add_node("research_agent", research_agent)
         self.graph_builder.add_node("tools", tools_node)
         self.graph_builder.add_node("note_agent", note_agent)
+        self.graph_builder.add_node("note_linking_agent", note_linking_agent)
         self.graph_builder.add_node("summary_agent", summary_agent)
         # Configure ToolNode with specific settings
         
@@ -28,7 +30,8 @@ class Graph:
         self.graph_builder.add_edge(START, "research_agent")
         self.graph_builder.add_conditional_edges("research_agent", self.tools_router, ["tools", "note_agent"])
         self.graph_builder.add_edge("tools", "research_agent")
-        self.graph_builder.add_edge("note_agent", "summary_agent")
+        self.graph_builder.add_edge("note_agent", "note_linking_agent")
+        self.graph_builder.add_edge("note_linking_agent", "summary_agent")
         self.graph_builder.add_edge("summary_agent", END)
         
         # Compile the graph
