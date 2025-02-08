@@ -33,17 +33,22 @@ vector_store = SupabaseVectorStore(
 )
 
 @tool
-def vector_search_tool(query: str):
+def vector_search_tool(query: str) -> str:
     """
-    Search the vector database with research papers about expoplanets.
+    Search the vector database with research papers about exoplanets.
     
     Args:
         query (str): The search query to execute
+        
+    Returns:
+        str: A string containing the search results
     """
     results = vector_store.similarity_search(query)
-
-    return results
+    # Convert the results to a string format
+    formatted_results = "\n\n".join([doc.page_content for doc in results])
+    return formatted_results
 
 
 if __name__ == "__main__":
-    print(vector_search_tool.invoke({"query": "How does the redder TESS bandpass affect oscillation amplitude compared to Kepler?"}))
+    # Direct invocation without using dict
+    print(vector_search_tool("How does the redder TESS bandpass affect oscillation amplitude compared to Kepler?"))
