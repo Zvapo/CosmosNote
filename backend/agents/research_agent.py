@@ -17,23 +17,13 @@ async def research_agent(state: GraphState, config: RunnableConfig):
                                   If you think that the information gathered is enough to anwser the prompt, reply with 'INFORMATION_GATHERED'
                                   """)
     
-    tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x.tool_calls])
-    
-    if tool_calls_count >= 3:
-        return Command(
-            update={
-                "messages": [AIMessage(content="INFORMATION_GATHERED")]
-            }
-        )
-    
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
-    # max three searches for the agent to use
-    tools = [web_search_tool, vector_search_tool, sql_tool]
+
+    search_tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x['name'] == 'web_search_tool'])
+    tools = [web_search_tool, vector_search_tool, sql_tool] if search_tool_calls_count < 3 else [vector_search_tool, sql_tool]
     llm_w_tools = llm.bind_tools(tools)
 
-    # Access state as dictionary
     messages = state["messages"]
-    print('messages', messages[-1].tool_calls)
     response = await llm_w_tools.ainvoke([system_prompt] + messages)
 
     return Command(
