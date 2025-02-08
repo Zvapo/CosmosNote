@@ -11,6 +11,7 @@ class ChatMessage(BaseModel):
 class GraphState(BaseModel):
     conversation_history: Annotated[List[ChatMessage], operator.add]
     user_prompt: str
+    generated_note: str
 
 class Agent0Response(BaseModel):
     response: str
