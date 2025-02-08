@@ -32,11 +32,7 @@ async def main():
         try:
             # Use astream to get updates from all nodes
             async for output in graph.graph.astream(initial_state.model_dump()):
-                # Check each node's output
-                for node_name, node_output in output.items():
-                    if "messages" in node_output and node_output["messages"]:
-                        # Print the last message from this node
-                        print(f"{node_name}: {node_output['messages'][-1].content}")
+                print('output',output)
 
         except Exception as e:
             print(f"Error processing message: {e}")

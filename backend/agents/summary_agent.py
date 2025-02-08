@@ -7,7 +7,7 @@ async def summary_agent(state: GraphState):
     """
 
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-    response = llm.invoke(state.messages)
+    response = llm.invoke(state.messages[-1].content)
     return {"messages": [response]}
 
 

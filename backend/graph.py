@@ -31,7 +31,7 @@ class Graph:
         
         # Compile the graph
         self.graph = self.graph_builder.compile()
-
+    
     def save_graph_image(self):
         os.makedirs("graphs_figs", exist_ok=True)
         graph_bytes = self.graph.get_graph().draw_mermaid_png()
