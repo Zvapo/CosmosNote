@@ -5,7 +5,7 @@ from tools.vector_search_tool import vector_search_tool
 from tools.sql_agent import sql_tool
 from langchain_core.runnables.config import RunnableConfig
 from langgraph.types import Command
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import SystemMessage
 
 async def research_agent(state: GraphState, config: RunnableConfig):
     """
@@ -23,6 +23,7 @@ async def research_agent(state: GraphState, config: RunnableConfig):
 
     # Access state as dictionary
     messages = state["messages"]
+    print('messages', messages)
     response = await llm_w_tools.ainvoke([system_prompt] + messages)
     return Command(
         update={
