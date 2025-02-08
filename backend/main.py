@@ -1,10 +1,10 @@
 import os
 import getpass
 from dotenv import load_dotenv
-from backend.graph import Graph
+from graph import Graph
 import asyncio
-from agents.models import GraphState, ChatMessage
-from datetime import datetime
+from agents.models import GraphState
+from langchain_core.messages import HumanMessage
 
 # Load environment variables first
 load_dotenv()
@@ -22,28 +22,21 @@ async def main():
     graph.save_graph_image()
 
     async def process_message(user_input: str):
-        # Create initial state
-        initial_state = {
-            "conversation_history": [
-                ChatMessage(
-                    role="user",
-                    content=user_input,
-                    timestamp=datetime.now().isoformat()
-                )
-            ],
-            "user_prompt": user_input
-        }
+        # Create initial state using GraphState model
+        initial_state = GraphState(
+            user_prompt=user_input,
+            search_results=[],
+            messages=[HumanMessage(content=user_input)]
+        )
         
         try:
-            # Use ainvoke instead of stream for async operation
-            result = await graph.graph.invoke(initial_state)
-            
-            # Process the result
-            if result and "conversation_history" in result:
-                latest_message = result["conversation_history"][-1]
-                print(f"Assistant: {latest_message.content}")
+            # Use astream to get updates from all nodes
+            async for output in graph.graph.astream(initial_state.model_dump()):
+                print('output',output)
+
         except Exception as e:
             print(f"Error processing message: {e}")
+            raise e  # Re-raise to see full traceback during development
 
     # Main interaction loop
     while True:
