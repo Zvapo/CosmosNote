@@ -22,21 +22,23 @@ async def main():
     graph.save_graph_image()
 
     async def process_message(user_input: str):
-        # Create initial state using GraphState model
-        initial_state = GraphState(
-            user_prompt=user_input,
-            search_results=[],
-            messages=[HumanMessage(content=user_input)]
-        )
+        # Create initial state as a dictionary
+        initial_state = {
+            "user_prompt": user_input,
+            "search_results": [],
+            "messages": [HumanMessage(content=user_input)],
+            "generated_note": None
+        }
         
         try:
             # Use astream to get updates from all nodes
-            async for output in graph.graph.astream(initial_state.model_dump()):
-                print('output',output)
+            async for output in graph.graph.astream(initial_state, {}):
+                if output.get('messages'):
+                    print('output', output['messages'][-1].content)
 
         except Exception as e:
             print(f"Error processing message: {e}")
-            raise e  # Re-raise to see full traceback during development
+            raise e
 
     # Main interaction loop
     while True:

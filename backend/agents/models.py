@@ -3,19 +3,20 @@ from pydantic import BaseModel
 import operator
 from datetime import datetime
 from langchain_core.messages import BaseMessage
+from typing_extensions import TypedDict
 
-class Note(BaseModel):
+class Note(TypedDict):
     title: str
     content: str
     tags: List[str]
 
-class SearchResult(BaseModel):
-    url: str
+class SearchResult(TypedDict):
+    source: str
     content: str
 
 # custom state graph inherits from the state graph class
-class GraphState(BaseModel):
+class GraphState(TypedDict):
     user_prompt: str
     search_results: Annotated[List[SearchResult], operator.add] = []
-    messages: Annotated[List[BaseMessage], operator.add] = []
+    messages: Annotated[List[BaseMessage], operator.add]
     generated_note: Optional[Note] = None
