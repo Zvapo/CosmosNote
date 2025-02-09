@@ -14,6 +14,10 @@ class SearchResult(TypedDict):
     source: str
     content: str
 
+class Summary(TypedDict):
+    content: str
+    follow_up_questions: List[str]
+
 # custom state graph inherits from the state graph class
 class GraphState(TypedDict):
     user_prompt: str

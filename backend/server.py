@@ -33,6 +33,14 @@ class SessionEvents:
 
     @staticmethod
     def format_event(message):
+        if isinstance(message, dict):
+            message = {
+                "status": "agent_message",
+                "agent": '',
+                "message": message["content"],
+                "follow_up_questions": message["follow_up_questions"]
+            }
+            return message
         if isinstance(message, AIMessage):
             if message.content == '':
                 return None

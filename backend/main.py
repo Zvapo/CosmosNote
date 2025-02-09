@@ -53,6 +53,14 @@ class SessionEvents:
         
     @staticmethod
     def format_event(message):
+        if isinstance(message, dict):
+            message = {
+                "status": "agent_message",
+                "agent": '',
+                "message": message["content"],
+                "follow_up_questions": message["follow_up_questions"]
+            }
+            return message
         if isinstance(message, AIMessage):
             if message.content == '':
                 return None
@@ -77,7 +85,7 @@ class SessionEvents:
                 "status": "tool_message",
                 "name": SessionEvents.TOOLS_DICT[message.name],
                 "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name],
-                "content": SessionEvents.format_search_content(message.content)
+                "content": message.content
             }
 
         return None
@@ -114,7 +122,6 @@ async def main():
                 for state_update in event.values():
                     if not state_update:
                         continue
-
                     messages = state_update.get("messages", [])
                     if len(messages) > 0:
                         message = SessionEvents.format_event(messages[0])
