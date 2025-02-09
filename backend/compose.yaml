@@ -30,6 +30,6 @@ services:
     build:
       context: ./quartz
     ports:
-      - 8080:8080
+      - 8081:8081
     volumes:
       - content:/quartz/app/content:rw
