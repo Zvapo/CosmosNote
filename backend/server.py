@@ -34,6 +34,11 @@ class SessionEvents:
     @staticmethod
     def format_event(message):
         if isinstance(message, AIMessage):
+
+            if message.content == '':
+                return None
+            if message.content == 'INFORMATION GATHERED':
+                return None
             return {
                 "status": "agent_message",
                 "agent": '',
