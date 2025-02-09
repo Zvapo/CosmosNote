@@ -113,7 +113,7 @@ export default function ResearchTool() {
                     {followupQuestions.map((question, index) => (
                       <div
                         key={index}
-                        className="underline hover:bg-gray-200 cursor-pointer w-fit"
+                        className="underline text-gray-400 hover:text-white cursor-pointer w-fit"
                         onClick={() => handleFollowupQuestionClick(question)}
                       >
                         {question}
