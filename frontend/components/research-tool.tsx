@@ -72,6 +72,8 @@ export default function ResearchTool() {
   const handleFollowupQuestionClick = (question: string) => {
     if (isProcessing) return;
 
+    setMessages(prev => [...prev, { role: "user", content: input }]);
+
     setInput(question);
     setIsProcessing(true);
     sendJsonMessage({
@@ -111,7 +113,7 @@ export default function ResearchTool() {
                     {followupQuestions.map((question, index) => (
                       <div
                         key={index}
-                        className="bg-gray-100 p-2 rounded-md underline hover:bg-gray-200 cursor-pointer"
+                        className="underline hover:bg-gray-200 cursor-pointer w-fit"
                         onClick={() => handleFollowupQuestionClick(question)}
                       >
                         {question}
