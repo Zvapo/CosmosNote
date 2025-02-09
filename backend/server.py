@@ -37,7 +37,8 @@ async def websocket_endpoint(websocket: WebSocket):
                         })
                     elif event['event'] == 'on_chat_model_stream':
                         chat_message = event['data']['chunk'].content
-                        if chat_message != '': # some chat messages are empty
+                        # some chat messages are empty and no streaming of note_linking_agent
+                        if chat_message != '' and 'note_linking_agent' not in event['tags']:
                             await websocket.send_json({
                                 "status": "message",
                                 "message": chat_message
