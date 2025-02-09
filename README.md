@@ -7,7 +7,10 @@ The information available to the swarm is stored in a vector database, a SQL dat
 
 This way an end-user has access to a verified database of information about exoplanets, and a constantly updating knowledge graph allowing the user to monitor the links between researched topics and access past research results at any time.
 
-[Demo GIF](demo_gif.gif)
+<p align="center">
+  <img src="demo_gif.gif" alt="ExoMind Demo" width="600"/>
+</p>
+
 
 ## Check out the website:
 
