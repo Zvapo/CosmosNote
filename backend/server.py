@@ -34,7 +34,6 @@ class SessionEvents:
     @staticmethod
     def format_event(message):
         if isinstance(message, AIMessage):
-
             if message.content == '':
                 return None
             if message.content == 'INFORMATION GATHERED':
@@ -45,11 +44,15 @@ class SessionEvents:
                 "message": message.content
             }
         if isinstance(message, HumanMessage):
+            if message.content == '':
+                return None
             return {
                 "status": "user_message",
                 "message": message.content
             }
         if isinstance(message, ToolMessage):
+            if message.content == '':
+                return None
             return {
                 "status": "tool_message",
                 "name": SessionEvents.TOOLS_DICT[message.name],
