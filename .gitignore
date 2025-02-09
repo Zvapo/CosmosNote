@@ -73,6 +73,5 @@ vectors*.db
 downloaded_pdfs*
 
 
-# Session data
-backend/session_data/
+backend/quartz/content/*
 backend/session_data/*
