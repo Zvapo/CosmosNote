@@ -1,6 +1,6 @@
 "use client"
 
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import useWebSocket from 'react-use-websocket';
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -13,7 +13,6 @@ import MessageComponent from './message-component';
 
 export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
-  const [response, setResponse] = useState<string>("")
   const [input, setInput] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -25,7 +24,7 @@ export default function ResearchTool() {
   } = useWebSocket(socketUrl, {
     onOpen: () => console.log('opened'),
     //Will attempt to reconnect on all close events, such as server shutting down
-    shouldReconnect: (closeEvent) => true,
+    shouldReconnect: () => true,
   });
 
   useEffect(() => {
