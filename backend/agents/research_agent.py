@@ -27,7 +27,6 @@ async def research_agent(state: GraphState, config: RunnableConfig):
     tools = [web_search_tool, vector_search_tool, sql_tool]
     llm_w_tools = llm.bind_tools(tools)
 
-    print(state["messages"])
     # count the number of web_search_tool tool calls
     search_tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x.tool_calls])
 

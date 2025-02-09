@@ -4,6 +4,7 @@ from langchain_core.messages import HumanMessage
 from state_managment import _create_session_file, _load_session_state, _save_session_state, _generate_session_id
 from dotenv import load_dotenv
 import os
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 load_dotenv()
 
@@ -18,6 +19,12 @@ class SessionEvents:
         "sql_tool": "SQL Query"
     }
 
+    TOOLS_MESSAGE_DICT = {
+        "web_search_tool": "Searching the web for information...",
+        "vector_search_tool": "Searching the vector database for information...",
+        "sql_tool": "Executing a SQL query..."
+    }
+
     AGENT_NAMING_DICT = {
         "research_agent": "Renowned Exoplanet Researcher",
         "note_agent": "Scientific Journalist",
@@ -25,36 +32,26 @@ class SessionEvents:
     }
 
     @staticmethod
-    def format_event(event, event_name:str):
-        if event_name == SessionEvents.TOOL_CALL_EVENT:
-            message = {
-                "status": "tool_called",
-                "name": SessionEvents.TOOLS_DICT[event['name']]
+    def format_event(message):
+        if isinstance(message, AIMessage):
+            return {
+                "status": "agent_message",
+                "agent": '',
+                "message": message.content
+            }
+        if isinstance(message, HumanMessage):
+            return {
+                "status": "user_message",
+                "message": message.content
+            }
+        if isinstance(message, ToolMessage):
+            return {
+                "status": "tool_message",
+                "name": SessionEvents.TOOLS_DICT[message.name],
+                "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name]
             }
 
-            return message
-        elif event_name == SessionEvents.MESSAGE_EVENT:
-            if event['tags'][1] == 'note_linking_agent':
-                return
-            if event['data']['chunk'].content == '':
-                return
-            
-            message = {
-                "status": "message",
-                "agent": SessionEvents.AGENT_NAMING_DICT[event['tags'][1]],
-                "message": event['data']['chunk'].content
-            }
-
-            return message
-        elif event_name == SessionEvents.START_OUTPUT_EVENT:
-            print(event_name)
-            if event['tags'][1] == 'note_linking_agent':
-                return
-            message = {
-                "status": "start_chat",
-                "agent": SessionEvents.AGENT_NAMING_DICT[event['tags'][1]]
-            }
-            return message
+        return None
 
 
 app = FastAPI()
@@ -63,7 +60,7 @@ app = FastAPI()
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     graph = Graph()
-    SAVE_SESSION_STATE = True # load session state from json file
+    SAVE_SESSION_STATE = False # load session state from json file
     if SAVE_SESSION_STATE:
         session_id = _generate_session_id()
         _create_session_file(session_id)
@@ -87,10 +84,16 @@ async def websocket_endpoint(websocket: WebSocket):
 
             # Stream the graph execution
             try:
-                async for event in graph.graph.astream_events(session_state, config, version="v1"):
-                    message = SessionEvents.format_event(event, event['event'])
-                    if message:
-                        await websocket.send_json(message)
+                async for event in graph.graph.astream(session_state, config):
+                    for state_update in event.values():
+                        if not state_update:
+                            continue
+
+                        messages = state_update.get("messages", [])
+                        if len(messages) > 0:
+                            message = SessionEvents.format_event(messages[0])
+                            if message:
+                                await websocket.send_json(message)
 
                     # save session state after graph execution
                     if SAVE_SESSION_STATE and event['event'] == 'on_chain_end':
@@ -118,4 +121,4 @@ async def websocket_endpoint(websocket: WebSocket):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=os.environ.get("PORT", 8000)) 
+    uvicorn.run(app, host="0.0.0.0", port=os.environ.get("PORT", 8000))

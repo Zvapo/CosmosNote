@@ -49,27 +49,22 @@ async def main():
         session_state["messages"].append(HumanMessage(content=user_input))
         
         try:
-            
-            async for event in graph.graph.astream_events(session_state, config, version="v1"):
-                print(event['event'])
-                if (event['event'] == 'on_chain_end'):
-                    print(event)
-                
-                # print('\nEvent: ', event['event'])
-                # if event['event'] == TOOL_CALL_EVENT:
-                #     print('TOOL Called: ', event['name'])
-                # elif event['event'] == MESSAGE_EVENT:
-                #     if 'note_linking_agent' in event['tags']:
-                #         continue
-                #     else:
-                #         print(event['tags'][1]) # print who is speaking
-                #         print(event['data']['chunk'].content, flush=True)
-            
-            _save_session_state(session_state, session_id)
+            async for event in graph.graph.astream(session_state, config):
+                for state_update in event.values():
+                    if not state_update:
+                        continue
+
+                    messages = state_update.get("messages", [])
+                    if len(messages) > 0:
+                        message = messages[0]
+                        if isinstance(message, AIMessage):
+                            print('\nmessage: ', message)
+                            print('\nstate_update: ', state_update)
+                        else:
+                            print('\ntool call: ', message.name)
 
         except Exception as e:
-            print(f"\nError processing message: {e}")
-            raise e
+            print(f"\nError processing event stream: {e}")
 
     # Main interaction loop
     while True:

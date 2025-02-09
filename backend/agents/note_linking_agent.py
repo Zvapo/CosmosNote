@@ -52,7 +52,6 @@ def note_linking_agent(state: GraphState):
     This agent is responsible for generating a note based on the research results and the user prompt.
     """
     existing_notes = list_notes() 
-    print('note linking agent')
     prompt = SystemMessage(content=SystemPrompts.TaggingAgentPrompt.invoke({"existing_notes_content": existing_notes}, {"note": state["generated_note"]["content"]}))
 
     errors = []
