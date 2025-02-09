@@ -5,11 +5,11 @@ from psycopg2.extras import execute_values
 from tqdm import tqdm  # Pasek postępu
 
 # --- KONFIGURACJA SUPABASE (PostgreSQL) ---
-DB_NAME = "postgres"
-DB_USER = "postgres.ezlovmsmtdengapiohfz"
-DB_PASSWORD = "Kepler-LOL42_GasGiant!"
-DB_HOST = "aws-0-eu-central-1.pooler.supabase.com"
-DB_PORT = "6543"
+DB_NAME = os.getenv('DB_NAME')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
 TABLE_NAME = "document_vectors"  # Nazwa tabeli w Supabase
 
 # --- Połączenie z lokalną bazą SQLite ---
