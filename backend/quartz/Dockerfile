@@ -11,4 +11,4 @@ COPY . .
 
 RUN npm install
 
-CMD ["npx", "quartz", "build", "--serve"]
+CMD ["npx", "quartz", "build", "--serve", "--port", "8081"]
