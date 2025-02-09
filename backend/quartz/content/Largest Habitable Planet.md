@@ -2,9 +2,9 @@ The largest known habitable planet is LHS 3154b, which has been identified as po
 
 ### Research Highlights:
 - **LHS 3154b**: This exoplanet is notable for its size and position within the habitable zone, which is the region around a star where conditions might be right for liquid water to exist. For more information, see [[Largest Habitable Planets]].
-- **Composition**: Given its mass, LHS 3154b likely has a composition akin to Neptune, which may affect its ability to support life as we know it. For more details, see [[Understanding Habitable Planets | its actual habitability]].
+- **Composition**: Given its mass, LHS 3154b likely has a composition akin to Neptune, which may affect its ability to support life as we know it. For more details, see [[Understanding Habitable Planets | its actual habitability]]. Additionally, the concept of habitability is closely tied to the [[Temperature Range for Habitable Planets]].
 
-For more detailed information, you can refer to the research article [here](https://news.uci.edu/2023/12/01/researchers-find-exoplanet-that-appears-to-be-too-big-for-its-sun/). Additionally, you may want to check the [[Current Weather in Poznan]] for any relevant environmental conditions that could impact the study of exoplanets.
+For more detailed information, you can refer to the research article [here](https://news.uci.edu/2023/12/01/researchers-find-exoplanet-that-appears-to-be-too-big-for-its-sun/). Additionally, you may want to check the [[Current Weather in Poznan]] for any relevant environmental conditions that could impact the study of exoplanets. 
 
 ### Follow-Up Questions:
 1. What criteria are used to determine if a planet is habitable?

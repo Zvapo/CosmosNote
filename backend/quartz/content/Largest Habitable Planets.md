@@ -13,7 +13,13 @@
 3. **Smallest Known Exoplanet:**
    - The search for habitable planets also includes the study of smaller exoplanets. For more information, see [[Smallest Known Exoplanet]].
 
-4. **Sources:**
+4. **Temperature Range:**
+   - The temperature range for these planets is crucial for determining their habitability. For more details, refer to [[Temperature Range for Habitable Planets]].
+
+5. **Details on 18 Delphini b:**
+   - For information on 18 Delphini b, see [[Details on 18 Delphini b]].
+
+6. **Sources:**
    - [NASA Science - TRAPPIST-1](https://science.nasa.gov/exoplanets/trappist1/)
    - [Potentially Habitable Exoplanets Ranked](https://www.reddit.com/r/spaceporn/comments/18ohb91/some_potentially_habitable_exoplanets_ranked_by/)
 

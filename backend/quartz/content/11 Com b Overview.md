@@ -12,3 +12,5 @@ The note has been tagged and stored in the database.
 4. How does [[14 Herculis b Exoplanet Overview]] compare to other exoplanets in terms of mass and composition?
 5. What are the key features of [[16 Cyg B b Exoplanet Overview | 16 Cyg B b]]?
 6. How does the mass of [[Smallest Known Exoplanet]] compare to that of [[11 Com b Overview | 11 Com b]]?
+7. What is the [[Temperature Range for Habitable Planets]] for potential life?
+8. For more information, see [[Details on 18 Delphini b]].

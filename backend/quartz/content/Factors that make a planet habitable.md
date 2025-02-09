@@ -2,7 +2,7 @@
 
 1. **Liquid Water**: The presence of liquid water is essential for life as we know it. It serves as a solvent for biochemical reactions and is crucial for the survival of organisms.
 
-2. **Stellar Habitable Zone**: A planet must be located within the "habitable zone" of its star, where temperatures allow for liquid water to exist. This zone varies depending on the star's size and temperature.
+2. **Stellar Habitable Zone**: A planet must be located within the "habitable zone" of its star, where temperatures allow for liquid water to exist. This zone varies depending on the star's size and temperature. For more information on the temperature conditions necessary for this, see [[Temperature Range for Habitable Planets]].
 
 3. **Atmosphere**: A suitable atmosphere is necessary to protect life from harmful radiation, maintain temperature, and provide essential gases like oxygen and carbon dioxide.
 
@@ -16,7 +16,7 @@
 
 ---
 
-**Direct Answer**: A planet is considered habitable if it has liquid water, is located in the habitable zone of its star, possesses a suitable atmosphere, has the right mass and size to retain that atmosphere, exhibits geological activity, has a protective magnetic field, and maintains a stable environment over time. For more information on the potential for additional planets that may fit these criteria, see [[Potential for Additional Planets in the HD 23472 System]]. For insights into the formation of potentially habitable planets, refer to [[Formation Mechanisms of Super-Mercuries]]. For a broader overview of these concepts, see [[11 Com b Overview | source text]]. For specific details on the characteristics of the exoplanet, see [[14 Herculis b Exoplanet Overview]]. For an overview of the exoplanet itself, see [[16 Cyg B b Exoplanet Overview]]. For information on the smallest known exoplanet, see [[Smallest Known Exoplanet]].
+**Direct Answer**: A planet is considered habitable if it has liquid water, is located in the habitable zone of its star, possesses a suitable atmosphere, has the right mass and size to retain that atmosphere, exhibits geological activity, has a protective magnetic field, and maintains a stable environment over time. For more information on the potential for additional planets that may fit these criteria, see [[Potential for Additional Planets in the HD 23472 System]]. For insights into the formation of potentially habitable planets, refer to [[Formation Mechanisms of Super-Mercuries]]. For a broader overview of these concepts, see [[11 Com b Overview | source text]]. For specific details on the characteristics of the exoplanet, see [[14 Herculis b Exoplanet Overview]]. For an overview of the exoplanet itself, see [[16 Cyg B b Exoplanet Overview]]. For information on the smallest known exoplanet, see [[Smallest Known Exoplanet]]. For details on the specific characteristics of 18 Delphini b, see [[Details on 18 Delphini b | source text]].
 
 ---
 

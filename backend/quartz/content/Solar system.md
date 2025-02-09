@@ -15,10 +15,4 @@ The solar system has 8 planets:
 - Jupiter
 - Saturn
 
-<<<<<<< HEAD
-For a planet to be considered habitable, it must meet certain criteria. See [[Criteria for Planet Habitability]] for more information. Additionally, there is a possibility of more celestial bodies in our vicinity; refer to [[Potential for Additional Planets in the HD 23472 System | source text]] for further details. For information on exoplanets, see [[14 Herculis b Exoplanet Overview | source text]], [[16 Cyg B b Exoplanet Overview]], and [[Smallest Known Exoplanet | source text]].
-=======
-For a planet to be considered habitable, it must meet certain criteria. See [[Criteria for Planet Habitability]] for more information. Additionally, the size of a planet plays a crucial role in its habitability. For more details, refer to [[Largest Habitable Planet | the size of a planet]]. Recent research has also explored the potential for habitable conditions on other planets; see [[Recent Research on Habitable Planets]]. Understanding the factors that contribute to habitability is essential, as discussed in [[Understanding Habitable Planets | source text]]. Furthermore, the concept of the largest habitable planet is significant in this context; see [[Largest Habitable Planets]]. 
-
-For current conditions, see [[Current Weather in Poznan]].
->>>>>>> 2f17913 (streaming to fe)
+For a planet to be considered habitable, it must meet certain criteria. See [[Criteria for Planet Habitability]] for more information. Additionally, see [[Temperature Range for Habitable Planets]] for details on the conditions necessary for habitability. There is also a possibility of more celestial bodies in our vicinity; refer to [[Potential for Additional Planets in the HD 23472 System | source text]] for further details. For information on exoplanets, see [[14 Herculis b Exoplanet Overview | source text]], [[16 Cyg B b Exoplanet Overview]], and [[Smallest Known Exoplanet | source text]]. For details on a specific exoplanet, see [[Details on 18 Delphini b | source text]].

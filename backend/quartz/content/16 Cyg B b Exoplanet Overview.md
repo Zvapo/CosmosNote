@@ -7,7 +7,7 @@ I have gathered the following information about the exoplanet [[16 Cyg B b Exopl
 5. **Host Star:** It orbits a G-type star, similar to our Sun.
 
 **Significance:**
-- [[16 Cyg B b Exoplanet Overview | source text]] is part of a binary star system located approximately 69 light-years away in the constellation Cygnus. Its characteristics provide insights into planetary formation and the diversity of exoplanets in various stellar environments, including comparisons to the [[Smallest Known Exoplanet]].
+- [[16 Cyg B b Exoplanet Overview | source text]] is part of a binary star system located approximately 69 light-years away in the constellation Cygnus. Its characteristics provide insights into planetary formation and the diversity of exoplanets in various stellar environments, including comparisons to the [[Smallest Known Exoplanet]] and the [[Temperature Range for Habitable Planets]]. For more detailed information, you can refer to the [[Details on 18 Delphini b]].
 
 For more detailed information, you can refer to the [NASA Exoplanet Catalog](https://science.nasa.gov/exoplanet-catalog/16-cygni-b-b/).
 

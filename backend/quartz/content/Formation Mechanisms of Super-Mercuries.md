@@ -16,3 +16,5 @@ These mechanisms highlight the complex interplay of factors that can lead to the
 1. What are the characteristics that distinguish super-Mercuries from other types of exoplanets?
 2. How do the environmental conditions around a star influence the formation of rocky planets?
 3. Are there any known super-Mercuries in our galaxy, and what have we learned from their study?
+
+For insights on the conditions that may allow for the existence of super-Mercuries, see [[Temperature Range for Habitable Planets]]. Additionally, for more information on specific super-Mercuries, refer to [[Details on 18 Delphini b]].

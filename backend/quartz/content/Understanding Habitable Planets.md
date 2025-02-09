@@ -8,7 +8,7 @@ Habitable planets are celestial bodies that have the potential to support life. 
 
 3. **Atmospheric Conditions**: A suitable atmosphere is necessary to protect life from harmful radiation and to regulate temperature. The atmosphere should also contain essential gases, such as oxygen and carbon dioxide.
 
-4. **Stable Climate**: A stable climate that allows for the development and sustenance of life forms is important. This includes a balance of temperature and weather patterns.
+4. **Stable Climate**: A stable climate that allows for the development and sustenance of life forms is important. This includes a balance of temperature and weather patterns. For more information on the temperature aspects, see [[Temperature Range for Habitable Planets]].
 
 5. **Geological Activity**: Some geological activity can be beneficial for life, as it can recycle nutrients and create diverse environments.
 
@@ -27,4 +27,6 @@ Additionally, for insights on how weather conditions might affect habitability, 
 2. How do scientists determine if a planet is in the habitable zone of its star?
 3. What recent discoveries have changed our understanding of habitability in extreme environments? 
 
-Additionally, the search for habitable planets often includes the study of the [[Smallest Known Exoplanet | smallest known exoplanet]], which may provide insights into the conditions necessary for life.
+Additionally, the search for habitable planets often includes the study of the [[Smallest Known Exoplanet | smallest known exoplanet]], which may provide insights into the conditions necessary for life. 
+
+For more information on a specific potentially habitable exoplanet, see [[Details on 18 Delphini b]].
