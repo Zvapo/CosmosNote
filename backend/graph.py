@@ -36,8 +36,8 @@ class Graph:
         self.graph_builder.add_edge("summary_agent", END)
         
         # Compile the graph
-        self.checkpointer = MemorySaver()
-        self.graph = self.graph_builder.compile(checkpointer=self.checkpointer)
+        # self.checkpointer = MemorySaver()
+        self.graph = self.graph_builder.compile()
     
 
     def save_graph_image(self):
