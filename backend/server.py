@@ -32,6 +32,13 @@ class SessionEvents:
     }
 
     @staticmethod
+    def format_search_content(content):
+        if content[0].keys() == ["content", "url"]:
+            return f"{content[0]['content']} \n\n {content[0]['url']}"
+        else:
+            return content
+
+    @staticmethod
     def format_event(message):
         if isinstance(message, AIMessage):
             if message.content == '':
