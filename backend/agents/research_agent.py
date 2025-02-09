@@ -29,7 +29,6 @@ async def research_agent(state: GraphState, config: RunnableConfig):
 
     # Access state as dictionary
     messages = state["messages"]
-    print('messages', messages[-1].tool_calls)
     response = await llm_w_tools.ainvoke([system_prompt] + messages)
 
     return Command(

@@ -19,13 +19,12 @@ SESSIONS_DIR.mkdir(exist_ok=True)
 def _generate_session_id():
     return str(uuid.uuid4())
 
-def _load_or_create_session():
+def _load_or_create_session(session_id: str = None):
     # Look for the most recent session file
-    session_files = list(SESSIONS_DIR.glob("session_*.json"))
-    if session_files:
-        latest_session = max(session_files, key=os.path.getctime)
-        with open(latest_session, 'r') as f:
-            return json.load(f), latest_session.stem.replace('session_', '')
+    session_file = SESSIONS_DIR / f"session_{session_id}.json"
+    if session_file.exists():
+        with open(session_file, 'r') as f:
+            return json.load(f), session_id
     
     # Create new session if none exists
     session_id = _generate_session_id()
@@ -63,10 +62,13 @@ async def main():
     graph = Graph()
     graph.save_graph_image()
     
-    # Load or create session state
-    session_state, session_id = _load_or_create_session()
-
+    # Generate a new session ID
+    session_id = _generate_session_id()
+    
     async def process_message(user_input: str):
+        # Load session state with the generated session ID
+        session_state, _ = _load_or_create_session(session_id)
+        print('session_state', session_state)
         # Update session state
         session_state["user_prompt"] = user_input
         session_state["messages"].append(HumanMessage(content=user_input))

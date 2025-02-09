@@ -7,6 +7,7 @@ def note_agent(state: GraphState):
     """
     This agent is responsible for generating a note based on the research results and the user prompt.
     """
+    print('note agent')
     prompt = SystemMessage(content=SystemPrompts.NotingAgentPrompt)
     
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
