@@ -83,7 +83,7 @@ export default function ResearchTool() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <header className="border-b">
         <div className="container mx-auto px-4 flex items-center justify-between h-16">
-          <h1 className="text-xl font-bold">Research Tool</h1>
+          <h1 className="text-xl font-bold">EXOMind</h1>
           <ThemeToggle />
         </div>
       </header>
@@ -131,7 +131,7 @@ export default function ResearchTool() {
                   placeholder="Ask a question..."
                   className="flex-grow"
                 />
-                
+
                 <Button onClick={handleSend} disabled={isProcessing}>Send</Button>
               </div>
             </div>
