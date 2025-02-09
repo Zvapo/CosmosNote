@@ -1,11 +1,10 @@
 from fastapi import FastAPI, WebSocket
 from graph import Graph
 from langchain_core.messages import HumanMessage
-from state_managment import _create_session_file, _load_session_state, _save_session_state, _generate_session_id
 from dotenv import load_dotenv
 import os
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
-
+import uuid
 load_dotenv()
 
 class SessionEvents:
@@ -77,27 +76,20 @@ app = FastAPI()
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     graph = Graph()
-    SAVE_SESSION_STATE = False # load session state from json file
-    session_id = _generate_session_id()
-    if SAVE_SESSION_STATE:
-        _create_session_file(session_id)
-    
+    session_id = str(uuid.uuid4())
     try:
         while True:
             # Wait for messages from the client
             data = await websocket.receive_json()
             await websocket.send_json(data)
 
-            if SAVE_SESSION_STATE:
-                session_state = _load_session_state(session_id)
-            else:
-                session_state = {
-                    "user_prompt": data['user_prompt'], # need to get user prompt from
-                    "messages": [HumanMessage(content=data['user_prompt'])]
-                }
-                config = {
-                    "configurable": {"thread_id": session_id}
-                }
+            session_state = {
+                "user_prompt": data['user_prompt'], # need to get user prompt from
+                "messages": [HumanMessage(content=data['user_prompt'])]
+            }
+            config = {
+                "configurable": {"thread_id": session_id}
+            }
 
             # Stream the graph execution
             try:
@@ -111,11 +103,6 @@ async def websocket_endpoint(websocket: WebSocket):
                             message = SessionEvents.format_event(messages[0])
                             if message:
                                 await websocket.send_json(message)
-
-                    # save session state after graph execution
-                    if SAVE_SESSION_STATE and event['event'] == 'on_chain_end':
-                        saved_session_state = graph.graph.get_state(config)
-                        _save_session_state(saved_session_state, session_id)
 
                 # Send completion message after graph execution
                 await websocket.send_json({
