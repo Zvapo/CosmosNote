@@ -23,4 +23,6 @@ For more detailed information, you can refer to the [NASA SEEC page on habitabil
 **Follow-Up Questions:**
 1. What are some examples of exoplanets that are considered potentially habitable?
 2. How do scientists determine if a planet is in the habitable zone of its star?
-3. What recent discoveries have changed our understanding of habitability in extreme environments?
+3. What recent discoveries have changed our understanding of habitability in extreme environments? 
+
+Additionally, the search for habitable planets often includes the study of the [[Smallest Known Exoplanet | smallest known exoplanet]], which may provide insights into the conditions necessary for life.

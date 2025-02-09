@@ -11,3 +11,4 @@ The note has been tagged and stored in the database.
 3. What is the significance of studying brown dwarfs in the context of star formation?
 4. How does [[14 Herculis b Exoplanet Overview]] compare to other exoplanets in terms of mass and composition?
 5. What are the key features of [[16 Cyg B b Exoplanet Overview | 16 Cyg B b]]?
+6. How does the mass of [[Smallest Known Exoplanet]] compare to that of [[11 Com b Overview | 11 Com b]]?

@@ -17,4 +17,6 @@ These criteria are based on our understanding of life on Earth, but researchers 
 ### Follow-Up Questions:
 1. What are some examples of exoplanets that are considered potentially habitable?
 2. How do scientists determine the habitable zone for different types of stars?
-3. What role does the presence of an atmosphere play in the potential for life on a planet?
+3. What role does the presence of an atmosphere play in the potential for life on a planet? 
+
+Additionally, the size of a planet, including the smallest known exoplanet [[Smallest Known Exoplanet]], plays a significant role in its habitability.

@@ -5,7 +5,7 @@
    - The known exoplanets include HD 23472 d, which is a terrestrial planet with a mass of 0.55 Earths, orbiting its star every 4 days at a distance of about 0.04298 AU.
 
 2. **Possibility of Additional Planets:**
-   - Given the nature of planetary formation and the dynamics of multi-planet systems, it is plausible that there are additional, yet undiscovered planets in the HD 23472 system. Ongoing research and advancements in detection methods may reveal more about this system in the future. For more information, see [[Potential for Additional Planets in the HD 23472 System]] and [[Formation Mechanisms of Super-Mercuries]]. Additionally, see [[11 Com b Overview | 11 Com b Overview]] for related insights. For insights on the potential characteristics of exoplanets in this system, refer to [[14 Herculis b Exoplanet Overview | source text]] and [[16 Cyg B b Exoplanet Overview]].
+   - Given the nature of planetary formation and the dynamics of multi-planet systems, it is plausible that there are additional, yet undiscovered planets in the HD 23472 system. Ongoing research and advancements in detection methods may reveal more about this system in the future. For more information, see [[Potential for Additional Planets in the HD 23472 System]] and [[Formation Mechanisms of Super-Mercuries]]. Additionally, see [[11 Com b Overview | 11 Com b Overview]] for related insights. For insights on the potential characteristics of exoplanets in this system, refer to [[14 Herculis b Exoplanet Overview | source text]], [[16 Cyg B b Exoplanet Overview]], and [[Smallest Known Exoplanet]].
 
 3. **Sources:**
    - [NASA Exoplanet Catalog - HD 23472 d](https://science.nasa.gov/exoplanet-catalog/hd-23472-d/)

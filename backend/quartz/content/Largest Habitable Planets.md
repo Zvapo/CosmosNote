@@ -10,7 +10,10 @@
 2. **TRAPPIST-1 System:**
    - While not the largest, the TRAPPIST-1 system is significant for having seven Earth-sized planets in the habitable zone, making it a prime target for the search for extraterrestrial life. See [[Understanding Habitable Planets | TRAPPIST-1 system]] for more information.
 
-3. **Sources:**
+3. **Smallest Known Exoplanet:**
+   - The search for habitable planets also includes the study of smaller exoplanets. For more information, see [[Smallest Known Exoplanet]].
+
+4. **Sources:**
    - [NASA Science - TRAPPIST-1](https://science.nasa.gov/exoplanets/trappist1/)
    - [Potentially Habitable Exoplanets Ranked](https://www.reddit.com/r/spaceporn/comments/18ohb91/some_potentially_habitable_exoplanets_ranked_by/)
 
