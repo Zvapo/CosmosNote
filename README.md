@@ -36,58 +36,13 @@ The swarm is made up of 4 main agents:
 - Access to a SQL database with numeric information from NASA's Expoplanet Archive
 - Access to a Obsidian Vault as a knowledge graph
 
-## Local Setup
+## Notes
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/ExoMind-AI/ExoMind.git
-cd ExoMind/backend
-```
-
-```bash
-# On Windows
-venv\Scripts\activate
-```
-
-```bash
-# On macOS/Linux 
-source venv/bin/activate
-```
-
-4. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-5. Run the backend:
-```bash
-python server.py
-```
-
-6. Install frontend dependencies:
-```bash
-cd ../frontend
-npm install
-```
-
-7. Run the frontend:
-```bash
-npm run dev
-```
-
-8. Navigate to the local host:
-```bash
-http://localhost:8000/
-```
-
-## Directory Structure
-
-```bash
-
-```
+Since the application uses a web-hosted vector database, a SQL database and a vast volume of research papers, the application cannot be hosted locally. If you would like to run the application, use the link to the website above.
 
 # The Team:
+
+Feel free to contact us with any questions or feedback!
 
 - [@Zvapo](https://github.com/Zvapo)
 - [@wojtasmat](https://github.com/wojtasmat)
