@@ -12,6 +12,8 @@ The formation of super-Mercuries, which are rocky exoplanets with a high density
 
 These mechanisms highlight the complex interplay of factors that can lead to the formation of super-Mercuries in a given planetary system. For more detailed insights, refer to [[Formation Mechanisms of Super-Mercuries]] and [[11 Com b Overview | 11 Com b Overview]]. Additionally, the characteristics and formation processes of super-Mercuries can be further understood in the context of [[14 Herculis b Exoplanet Overview | source text]], [[16 Cyg B b Exoplanet Overview | source text]], and [[Smallest Known Exoplanet]]. 
 
+For a deeper understanding of the broader context of these phenomena, see [[Understanding Exoplanets]] and [[Exoplanets]].
+
 ### Follow-Up Questions:
 1. What are the characteristics that distinguish super-Mercuries from other types of exoplanets?
 2. How do the environmental conditions around a star influence the formation of rocky planets?

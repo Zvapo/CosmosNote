@@ -9,4 +9,4 @@ For more detailed information, you can refer to the research article [here](http
 ### Follow-Up Questions:
 1. What criteria are used to determine if a planet is habitable?
 2. Are there any other large exoplanets that are considered potentially habitable?
-3. How do scientists study the atmospheres of exoplanets to assess their habitability?
+3. How do scientists study the atmospheres of [[Exoplanets]] to assess their habitability?

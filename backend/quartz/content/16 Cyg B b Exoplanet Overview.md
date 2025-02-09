@@ -14,4 +14,4 @@ For more detailed information, you can refer to the [NASA Exoplanet Catalog](htt
 ### Follow-Up Questions:
 1. What are the atmospheric conditions like on [[16 Cyg B b Exoplanet Overview]]?
 2. How does the presence of a binary star system affect the orbit of [[16 Cyg B b Exoplanet Overview]]?
-3. Are there any other known exoplanets in the 16 Cygni system?
+3. Are there any other known exoplanets in the [[Exoplanets]] system?
