@@ -19,6 +19,7 @@ export default function ResearchTool() {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null)
 
   const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || '';
+  console.log("socketUrl", process.env);
 
   const {
     sendJsonMessage,
@@ -107,7 +108,7 @@ export default function ResearchTool() {
 
           <TabsContent value="map" className="h-[calc(100vh-9rem)]">
             <div className="h-full border rounded-md overflow-hidden">
-              <iframe id="quartz-iframe" src="http://localhost:8080" className="w-full h-full" title="Quartz Thought Map" />
+              <iframe id="quartz-iframe" src={process.env.NEXT_PUBLIC_QUARTZ_URL} className="w-full h-full" title="Quartz Thought Map" />
             </div>
           </TabsContent>
         </Tabs>
