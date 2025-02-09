@@ -33,5 +33,7 @@ def sql_tool(query: str) -> str:
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         verbose=True
     )
-    return agent_executor.run(query)
+    response = agent_executor.run(query)
+    print('RESPONSE FROM SQL TOOL', response)
+    return response
 

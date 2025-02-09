@@ -58,6 +58,7 @@ def vector_search_tool(query: str) -> str:
     results = vector_store.similarity_search(query)
     # Convert the results to a string format
     formatted_results = "\n\n".join([doc.page_content for doc in results])
+    print(formatted_results)
     return formatted_results
 
 

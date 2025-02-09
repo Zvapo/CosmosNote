@@ -1,0 +1,15 @@
+{
+  "user_prompt": "what is the recent research on habitable planets?",
+  "search_results": [],
+  "messages": [
+    {
+      "type": "human",
+      "content": "What is the radius of the largest habitable planet in the database?"
+    },
+    {
+      "type": "human",
+      "content": "what is the recent research on habitable planets?"
+    }
+  ],
+  "generated_note": null
+}

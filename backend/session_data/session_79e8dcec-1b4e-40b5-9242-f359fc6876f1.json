@@ -1,0 +1,10 @@
+{
+  "user_prompt": "what is the largest habitable planet?",
+  "messages": [
+    {
+      "type": "human",
+      "content": "what is the largest habitable planet?"
+    }
+  ],
+  "generated_note": null
+}

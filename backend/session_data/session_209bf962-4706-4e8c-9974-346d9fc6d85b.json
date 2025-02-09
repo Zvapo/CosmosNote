@@ -1,0 +1,14 @@
+{
+  "user_prompt": "cool, what is the largest habitable planet and what research can you present on it?",
+  "messages": [
+    {
+      "type": "human",
+      "content": "what are habitable planets?"
+    },
+    {
+      "type": "human",
+      "content": "cool, what is the largest habitable planet and what research can you present on it?"
+    }
+  ],
+  "generated_note": null
+}

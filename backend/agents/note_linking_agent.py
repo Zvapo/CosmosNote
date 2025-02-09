@@ -69,6 +69,7 @@ def note_linking_agent(state: GraphState):
         prompt = f"""
         Update the note content so that it links to the "{state["generated_note"]["title"]}" note. A link to a note is formatted as [[{state["generated_note"]["title"]}]].
         If linking to a note would change the text of the note, use an alias [{state["generated_note"]["title"]} | source text]]. Do not change the content of the note, only add links.
+        Do not add links that refer to the note itself.
         If you are unable to add a link, do not add any links.
 
         Current note:
