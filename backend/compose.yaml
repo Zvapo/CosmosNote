@@ -1,0 +1,35 @@
+volumes:
+  content:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/quartz/content
+
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - content:/app/quartz/content:rw
+    environment:
+      - TAVILY_API_KEY=$TAVILY_API_KEY
+      - DB_URI=$DB_URI
+      - SUPABASE_URL=$SUPABASE_URL
+      - SUPABASE_API_KEY=$SUPABASE_API_KEY
+      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - LANGSMITH_API_KEY=$LANGSMITH_API_KEY
+      - LANGSMITH_TRACING=$LANGSMITH_TRACING
+      - LANGSMITH_ENDPOINT=$LANGSMITH_ENDPOINT
+      - LANGSMITH_PROJECT=$LANGSMITH_PROJECT
+    user: "1000:1000"
+      
+  quartz:
+    build:
+      context: ./quartz
+    ports:
+      - 8080:8080
+    volumes:
+      - content:/quartz/app/content:rw

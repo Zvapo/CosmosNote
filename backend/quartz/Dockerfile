@@ -1,11 +1,14 @@
 FROM node:20-slim AS builder
-WORKDIR /usr/src/app
+WORKDIR /quartz/app
 COPY package.json .
 COPY package-lock.json* .
 RUN npm ci
 
 FROM node:20-slim
-WORKDIR /usr/src/app
-COPY --from=builder /usr/src/app/ /usr/src/app/
+WORKDIR /quartz/app
+COPY --from=builder /quartz/app/ /quartz/app/
 COPY . .
+
+RUN npm install
+
 CMD ["npx", "quartz", "build", "--serve"]
