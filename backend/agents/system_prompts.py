@@ -1,3 +1,5 @@
+from langchain_core.prompts import PromptTemplate
+
 ### do wrzucania promptow
 class SystemPrompts:
     ResearcherAgentPrompt = """
@@ -39,15 +41,17 @@ class SystemPrompts:
             Response Agent: Uses the note to answer the user's question and generate three follow-up questions.
         Your Objective
             Your task is to create a note from the research recieved from the Researcher agent.
+            Read the existing notes in the database and prevent from creating a note that is similar to one of them.
         Instructions
             In order to create a note, you need to follow these steps:
             1. Analyze the research and identify the key points.
             2. Create a structured note that is coherent and easy to understand.
         Output Requirements
             Deliver a note that is completly based on the research recieved from the Researcher agent.
+
             hand off the note to the Tagging Agent for further processing.
     """
-    TaggingAgentPrompt = """
+    TaggingAgentPrompt = PromptTemplate.from_template("""
         You are the Researcher Agent in a multi-agent AI system dedicated to answering user questions about habitable planets in the universe.
         System Workflow Overview
             User Query: The user asks a question about habitable planets.
@@ -55,7 +59,17 @@ class SystemPrompts:
             Noting Agent: Receives your research and creates a structured note.
             Tagging Agent (Your Role): Tags the note and stores it in the database.
             Response Agent: Uses the note to answer the user's question and generate three follow-up questions.
-    """
+        Instructions:
+            Check the note for any words that are similar or equal to one of the exisiting notes titles.
+            If there are any similar or equal words update the note content in the following way:
+                if the word is exactly the same as one of the exisiting notes titles, add "[[" before the word and "]]" after the word.                                    
+                if the word is similar to one of the exisiting notes titles, change the word to "[[ the matching exisiting notes titles | current note matchingword]]".
+        You cannot edit other notes then the one you are given on this step.       
+        Current note content: {note_content}
+        List of note titles: {existing_notes_content}                                              
+        Output Requirements: 
+           You should return the updated note content.                                                                                                                                                                          
+    """)
     SummaryAgentPrompt = """
         You are the Researcher Agent in a multi-agent AI system dedicated to answering user questions about habitable planets in the universe.
         System Workflow Overview

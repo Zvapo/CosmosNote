@@ -51,8 +51,9 @@ def note_linking_agent(state: GraphState):
     """
     This agent is responsible for generating a note based on the research results and the user prompt.
     """
+    existing_notes = list_notes() 
     print('note linking agent')
-    prompt = SystemMessage(content=SystemPrompts.TaggingAgentPrompt)
+    prompt = SystemMessage(content=SystemPrompts.TaggingAgentPrompt.invoke({"existing_notes_content": existing_notes}, {"note": state["generated_note"]["content"]}))
 
     errors = []
     
@@ -68,13 +69,17 @@ def note_linking_agent(state: GraphState):
     for note in list_notes():
         existing_note = read_note(note)
         prompt = f"""
-        Update the note content so that it links to the "{state["generated_note"]["title"]}" note. A link to a note is formatted as [[{state["generated_note"]["title"]}]].
-        If linking to a note would change the text of the note, use an alias [{state["generated_note"]["title"]} | source text]]. Do not change the content of the note, only add links.
-        Do not add links that refer to the note itself.
-        If you are unable to add a link, do not add any links.
 
-        Current note:
-        {existing_note}
+        Your job is to take the newly saved note title and check for it occurences in every note.
+        If you find any similar or equal words in one of the existing notes, update it in the following way:
+                if the word is exactly the same, add "[[" before the word and "]]" after the word.                                    
+                if the word is similar, change the word to "[[ the matching saved note title | current note word]]".
+               
+        Current note title: 
+            {state["generated_note"]["title"]}
+        Output Requirements: 
+           You should return the updated note content.
+        
         """
 
         response = llm.invoke(prompt)
