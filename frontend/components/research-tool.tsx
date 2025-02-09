@@ -72,7 +72,7 @@ export default function ResearchTool() {
   const handleFollowupQuestionClick = (question: string) => {
     if (isProcessing) return;
 
-    setMessages(prev => [...prev, { role: "user", content: input }]);
+    setMessages(prev => [...prev, { role: "user", content: question }]);
 
     setInput(question);
     setIsProcessing(true);
