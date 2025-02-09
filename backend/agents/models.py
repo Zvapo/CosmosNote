@@ -17,6 +17,5 @@ class SearchResult(TypedDict):
 # custom state graph inherits from the state graph class
 class GraphState(TypedDict):
     user_prompt: str
-    search_results: Annotated[List[SearchResult], operator.add] = []
     messages: Annotated[List[BaseMessage], operator.add]
     generated_note: Optional[Note] = None

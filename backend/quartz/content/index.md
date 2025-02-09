@@ -1,3 +1,5 @@
+Here is the updated note content with the appropriate links added:
+
 ---
 title: Welcome to your thought map
 ---
