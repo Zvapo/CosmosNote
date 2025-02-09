@@ -44,8 +44,6 @@ async def websocket_endpoint(websocket: WebSocket):
                                 "message": chat_message
                             })
                 
-                
-                
                 # Send completion message after graph execution
                 await websocket.send_json({
                      "status": "complete"
