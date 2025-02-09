@@ -1,6 +1,7 @@
 # JavaScript
 *node_modules/
 backend/quartz/docs/
+*quartz/public/
 
 # Python
 __pycache__/
