@@ -45,6 +45,13 @@ class SessionEvents:
     }
 
     @staticmethod
+    def format_search_content(content):
+        if content.keys() == ["content", "url"]:
+            return f"{content["content"]} \n\n {content["url"]}"
+        else:
+            return content["content"]
+        
+    @staticmethod
     def format_event(message):
         if isinstance(message, AIMessage):
             if message.content == '':
@@ -69,7 +76,8 @@ class SessionEvents:
             return {
                 "status": "tool_message",
                 "name": SessionEvents.TOOLS_DICT[message.name],
-                "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name]
+                "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name],
+                "content": SessionEvents.format_search_content(message.content)
             }
 
         return None
