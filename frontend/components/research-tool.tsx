@@ -74,7 +74,6 @@ export default function ResearchTool() {
 
     setMessages(prev => [...prev, { role: "user", content: question }]);
 
-    setInput(question);
     setIsProcessing(true);
     sendJsonMessage({
       user_prompt: question,
