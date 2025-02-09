@@ -15,6 +15,7 @@ export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
+  const [followupQuestions, setFollowupQuestions] = useState<string[]>([])
   
   const scrollAreaRef = useRef<HTMLDivElement | null>(null)
 
@@ -32,14 +33,17 @@ export default function ResearchTool() {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string };
-
-      console.log("data", data);
+      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string, followup_questions?: string[] };
 
       if (data.status === "agent_message") {
         setMessages(prev => {
           return [...prev, { role: "ai", content: data.message }];
         });
+
+        if (data.followup_questions && data.followup_questions.length > 0) {
+          setFollowupQuestions(data.followup_questions);
+        }
+
       } else if (data.status === "tool_message") {
         setMessages(prev => [...prev, { role: "tool", content: data.message, tool_name: data.name }]);
       } else if (data.status === "complete") {
@@ -63,6 +67,16 @@ export default function ResearchTool() {
       setMessages(prev => [...prev, { role: "user", content: input }]);
       setInput("");
     }
+  }
+
+  const handleFollowupQuestionClick = (question: string) => {
+    if (isProcessing) return;
+
+    setInput(question);
+    setIsProcessing(true);
+    sendJsonMessage({
+      user_prompt: question,
+    });
   }
 
   return (
@@ -91,6 +105,22 @@ export default function ResearchTool() {
                 {isProcessing && (
                   <LoaderMessage />
                 )}
+
+                {followupQuestions.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    {followupQuestions.map((question, index) => (
+                      <div
+                        key={index}
+                        className="bg-gray-100 p-2 rounded-md underline hover:bg-gray-200 cursor-pointer"
+                        onClick={() => handleFollowupQuestionClick(question)}
+                      >
+                        {question}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+
               </ScrollArea>
               
               <div className="flex gap-2">
@@ -101,6 +131,7 @@ export default function ResearchTool() {
                   placeholder="Ask a question..."
                   className="flex-grow"
                 />
+                
                 <Button onClick={handleSend} disabled={isProcessing}>Send</Button>
               </div>
             </div>
