@@ -1,10 +1,11 @@
 from fastapi import FastAPI, WebSocket
 from graph import Graph
-import json
-import asyncio
 from langchain_core.messages import HumanMessage
-import uuid
 from state_managment import _create_session_file, _load_session_state, _save_session_state, _generate_session_id
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class SessionEvents:
     TOOL_CALL_EVENT = 'on_tool_start'
@@ -30,6 +31,7 @@ class SessionEvents:
                 "status": "tool_called",
                 "name": SessionEvents.TOOLS_DICT[event['name']]
             }
+
             return message
         elif event_name == SessionEvents.MESSAGE_EVENT:
             if event['tags'][1] == 'note_linking_agent':
@@ -42,8 +44,10 @@ class SessionEvents:
                 "agent": SessionEvents.AGENT_NAMING_DICT[event['tags'][1]],
                 "message": event['data']['chunk'].content
             }
+
             return message
         elif event_name == SessionEvents.START_OUTPUT_EVENT:
+            print(event_name)
             if event['tags'][1] == 'note_linking_agent':
                 return
             message = {
@@ -114,4 +118,4 @@ async def websocket_endpoint(websocket: WebSocket):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+    uvicorn.run(app, host="0.0.0.0", port=os.environ.get("PORT", 8000)) 

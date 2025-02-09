@@ -38,7 +38,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 8000
+EXPOSE 8001
 
 # Change the UID to match the user in compose.yaml
 ARG UID=1000
@@ -55,4 +55,4 @@ RUN adduser \
 RUN mkdir -p /app/quartz/content && chown -R appuser:appuser /app/quartz/content
 
 # Run the application.
-CMD uvicorn server:app --host=0.0.0.0 --port=8000
+CMD uvicorn server:app --host=0.0.0.0 --port=8001

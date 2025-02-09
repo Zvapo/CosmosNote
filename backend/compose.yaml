@@ -11,7 +11,7 @@ services:
     build:
       context: .
     ports:
-      - 8000:8000
+      - 8001:8001
     volumes:
       - content:/app/quartz/content:rw
     environment:
