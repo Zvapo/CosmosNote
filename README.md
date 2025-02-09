@@ -1,8 +1,10 @@
 # ExoMind
 
-ExoMind is a research assistant that utilises an agentic swarm and a knowledge graph to facilitate research about exoplanets.
+**ExoMind** is a research assistant that utilises an agentic swarm and a knowledge graph to facilitate research about exoplanets.
+
 The swarm is made up of multiple agents working together to anwsers users research questions and generate notes about the research.
 Generated notes are stored in an Obsidian Vault - a knowledge graph linking existing notes. Users can view the growing knowledge graph as they ask more questions.
+
 The information available to the swarm is stored in a vector database, a SQL database and a web-search tool.
 
 This way an end-user has access to a verified database of information about exoplanets, and a constantly updating knowledge graph allowing the user to monitor the links between researched topics and access past research results at any time.
