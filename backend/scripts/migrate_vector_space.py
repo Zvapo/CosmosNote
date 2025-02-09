@@ -3,6 +3,11 @@ import numpy as np
 import psycopg2
 from psycopg2.extras import execute_values
 from tqdm import tqdm  # Pasek postępu
+from dotenv import load_dotenv
+import os
+
+# 🔹 Załaduj zmienne środowiskowe z pliku .env
+load_dotenv()
 
 # --- KONFIGURACJA SUPABASE (PostgreSQL) ---
 DB_NAME = os.getenv('DB_NAME')
@@ -11,6 +16,9 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 TABLE_NAME = "document_vectors"  # Nazwa tabeli w Supabase
+
+# --- Konfigurcja Vector Space ---
+VECTOR_SIZE = 3072  # Rozmiar wektorów dla text-embedding-3-large
 
 # --- Połączenie z lokalną bazą SQLite ---
 conn_sqlite = sqlite3.connect("vectors.db")
@@ -36,7 +44,7 @@ CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
     id SERIAL PRIMARY KEY,
     filename TEXT,
     text_snippet TEXT,
-    vector VECTOR(1536)  -- Obsługa nowego wymiaru dla text-embedding-ada-002
+    vector VECTOR({VECTOR_SIZE})  -- Obsługa nowego wymiaru dla text-embedding-3-large
 )
 """)
 conn_pg.commit()
@@ -53,8 +61,8 @@ for row in tqdm(rows, desc="📂 Przetwarzanie wektorów", unit="vec"):
     # Konwersja z SQLite (binary blob) na listę floatów
     vector = np.frombuffer(vector_blob, dtype=np.float32).tolist()
     
-    # Sprawdzenie poprawności wymiaru (powinno być 1536D)
-    if len(vector) != 1536:
+    # Sprawdzenie poprawności wymiaru
+    if len(vector) != VECTOR_SIZE:
         print(f"⚠️ Wektor dla {filename} ma niepoprawny wymiar: {len(vector)}")
         continue  # Pomijamy błędne dane
 

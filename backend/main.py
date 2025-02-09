@@ -49,19 +49,13 @@ async def main():
         session_state["messages"].append(HumanMessage(content=user_input))
         
         try:
-            async for event in graph.graph.astream(session_state, config):
-                for state_update in event.values():
-                    if not state_update:
-                        continue
-
-                    messages = state_update.get("messages", [])
-                    if len(messages) > 0:
-                        message = messages[0]
-                        if isinstance(message, AIMessage):
-                            print('\nmessage: ', message)
-                            print('\nstate_update: ', state_update)
-                        else:
-                            print('\ntool call: ', message.name)
+            async for event in graph.graph.astream_events(session_state, config, version="v2"):
+                
+                print(event['event'])
+                if (event['event'] == 'on_chat_model_end'):
+                    print(event['data']['input']['messages'][1])
+                    print(event['data']['output']['messages'][-1].tags[1])
+                
 
         except Exception as e:
             print(f"\nError processing event stream: {e}")

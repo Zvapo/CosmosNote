@@ -61,8 +61,8 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     graph = Graph()
     SAVE_SESSION_STATE = False # load session state from json file
+    session_id = _generate_session_id()
     if SAVE_SESSION_STATE:
-        session_id = _generate_session_id()
         _create_session_file(session_id)
     
     try:
