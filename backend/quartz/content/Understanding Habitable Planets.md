@@ -23,7 +23,7 @@ Additionally, for insights on how weather conditions might affect habitability, 
 ---
 
 **Follow-Up Questions:**
-1. What are some examples of exoplanets that are considered potentially habitable?
+1. What are some examples of [[Exoplanets | exoplanets]] that are considered potentially habitable?
 2. How do scientists determine if a planet is in the habitable zone of its star?
 3. What recent discoveries have changed our understanding of habitability in extreme environments? 
 

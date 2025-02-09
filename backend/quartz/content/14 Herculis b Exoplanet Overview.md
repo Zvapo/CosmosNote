@@ -13,3 +13,5 @@ This information will be tagged and stored in the database for future reference.
 3. What methods are used to detect and study exoplanets like [[14 Herculis b Exoplanet Overview | source text]]?
 4. What similarities and differences exist between [[14 Herculis b Exoplanet Overview | source text]] and [[16 Cyg B b Exoplanet Overview]]?
 5. How does [[Smallest Known Exoplanet]] compare in size and mass to [[14 Herculis b Exoplanet Overview | source text]]?
+
+Additionally, this note is related to the topic of [[Exoplanets]].

@@ -30,6 +30,7 @@ async def main():
     
     TOOL_CALL_EVENT = 'on_tool_start'
     MESSAGE_EVENT = 'on_chat_model_stream'
+    START_OUTPUT_EVENT = 'on_chat_model_start'
 
     # Load or create session state
     session_state = {
@@ -48,17 +49,21 @@ async def main():
         session_state["messages"].append(HumanMessage(content=user_input))
         
         try:
-            print("\nAssistant: ", end="", flush=True)  # Start response on new line
             
             async for event in graph.graph.astream_events(session_state, config, version="v1"):
-                print('\nEvent: ', event['event'])
-                if event['event'] == TOOL_CALL_EVENT:
-                    print('TOOL Called: ', event['name'])
-                elif event['event'] == MESSAGE_EVENT:
-                    if 'note_linking_agent' in event['tags']:
-                        continue
-                    else:
-                        print(event['data']['chunk'].content, flush=True)
+                print(event['event'])
+                if (event['event'] == 'on_chain_end'):
+                    print(event)
+                
+                # print('\nEvent: ', event['event'])
+                # if event['event'] == TOOL_CALL_EVENT:
+                #     print('TOOL Called: ', event['name'])
+                # elif event['event'] == MESSAGE_EVENT:
+                #     if 'note_linking_agent' in event['tags']:
+                #         continue
+                #     else:
+                #         print(event['tags'][1]) # print who is speaking
+                #         print(event['data']['chunk'].content, flush=True)
             
             _save_session_state(session_state, session_id)
 

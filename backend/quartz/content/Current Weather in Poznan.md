@@ -12,4 +12,4 @@ If you have any further questions or need additional information, feel free to a
 2. How does the current weather in Poznan compare to other cities in Poland?
 3. What are some popular activities to do in Poznan during winter? 
 
-For more details, you can check the [[Current Weather in Poznan]].
+For more details, you can check the [[Current Weather in Poznan]]. Additionally, if you're interested in how weather conditions might affect other celestial phenomena, you might want to explore [[Exoplanets | Understanding Exoplanets]].

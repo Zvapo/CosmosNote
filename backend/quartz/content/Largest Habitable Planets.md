@@ -3,20 +3,15 @@
 1. **Largest Habitable Planets:**
    - The largest potentially habitable exoplanets are often categorized as "super-Earths," which are larger than Earth but smaller than gas giants. See [[Understanding Habitable Planets]] for more details.
    - Some notable candidates include:
-     - **Kepler-22b**: Approximately 2.4 times the radius of Earth, located in the habitable zone of its star.
-     - **Kepler-186f**: About 1.1 times the radius of Earth, also in the habitable zone.
-     - **LHS 1140 b**: Roughly 1.4 times the radius of Earth, located in the habitable zone of a red dwarf star.
+     - **Kepler-22b**: Approximately 2.4 times the radius of Earth, located in the habitable zone of its star. See [[Exoplanets | Kepler-22b]] for more information.
+     - **Kepler-186f**: About 1.1 times the radius of Earth, also in the habitable zone. See [[Exoplanets | Kepler-186f]] for more information.
+     - **LHS 1140 b**: Roughly 1.4 times the radius of Earth, located in the habitable zone of a red dwarf star. See [[Exoplanets | LHS 1140 b]] for more information.
 
 2. **TRAPPIST-1 System:**
-   - While not the largest, the TRAPPIST-1 system is significant for having seven Earth-sized planets in the habitable zone, making it a prime target for the search for extraterrestrial life. See [[Understanding Habitable Planets | TRAPPIST-1 system]] for more information.
+   - While not the largest, the TRAPPIST-1 system is significant for having seven Earth-sized planets in the habitable zone, making it a prime target for the search for extraterrestrial life. See [[Understanding Habitable Planets | TRAPPIST-1 system]] for more information. Also, see [[Exoplanets | TRAPPIST-1]] for additional details.
 
-<<<<<<< HEAD
 3. **Smallest Known Exoplanet:**
    - The search for habitable planets also includes the study of smaller exoplanets. For more information, see [[Smallest Known Exoplanet]].
-=======
-3. **Current Weather:**
-   - For the latest updates on the weather conditions in Poznan, refer to [[Current Weather in Poznan | weather updates]].
->>>>>>> 2f17913 (streaming to fe)
 
 4. **Sources:**
    - [NASA Science - TRAPPIST-1](https://science.nasa.gov/exoplanets/trappist1/)
