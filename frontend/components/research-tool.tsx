@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import useWebSocket, { ReadyState } from 'react-use-websocket';
+
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -16,14 +18,34 @@ export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
 
+  const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || '';
+
+  const {
+    sendJsonMessage,
+    lastMessage,
+    sendMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log('opened'),
+    //Will attempt to reconnect on all close events, such as server shutting down
+    shouldReconnect: (closeEvent) => true,
+  });
+
+  useEffect(() => {
+    if (lastMessage) {
+      console.log(lastMessage);
+    }
+  }, [lastMessage]);
+
   const handleSend = () => {
     if (input.trim()) {
-      setMessages([...messages, { role: "user", content: input }])
-      // Placeholder for AI response
-      setTimeout(() => {
-        setMessages((prev) => [...prev, { role: "ai", content: `AI response to: ${input}` }])
-      }, 1000)
-      setInput("")
+      sendJsonMessage({
+        user_prompt: input,
+      });
+      setMessages(prev => [...prev, { role: "user", content: input }]);
+      setInput("");
     }
   }
 
@@ -58,6 +80,7 @@ export default function ResearchTool() {
                   </div>
                 ))}
               </ScrollArea>
+              
               <div className="flex gap-2">
                 <Input
                   value={input}
