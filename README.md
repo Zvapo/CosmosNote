@@ -44,7 +44,7 @@ The swarm is made up of 4 main agents:
 git clone https://github.com/ExoMind-AI/ExoMind.git
 cd ExoMind/backend
 ```
-(https://github.com/syrianah)
+
 ```bash
 # On Windows
 venv\Scripts\activate
