@@ -7,7 +7,6 @@ from graph import Graph
 import asyncio
 from agents.models import GraphState
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
-from state_managment import _create_session_file, _load_session_state, _save_session_state, _generate_session_id
 import uuid
 
 # Load environment variables first
@@ -88,8 +87,7 @@ async def main():
     graph = Graph()
     graph.save_graph_image()
     
-    session_id = _generate_session_id()
-    _create_session_file(session_id)
+    session_id = str(uuid.uuid4())
     
     TOOL_CALL_EVENT = 'on_tool_start'
     MESSAGE_EVENT = 'on_chat_model_stream'
@@ -107,7 +105,6 @@ async def main():
     }
 
     async def process_message(user_input: str):
-        session_state = _load_session_state(session_id)
         session_state["user_prompt"] = user_input
         session_state["messages"].append(HumanMessage(content=user_input))
         
