@@ -30,22 +30,16 @@ export default function ResearchTool() {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      const data = lastJsonMessage as { status: 'start_chat' | 'tool_called' | 'message' | 'complete', message: string, agent: string, tool_name?: string };
+      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string };
 
-      if (data.status === "message") {
+      console.log("data", data);
+
+      if (data.status === "agent_message") {
         setMessages(prev => {
-          const currentMessage = prev[prev.length - 1];
-          currentMessage.content = currentMessage.content + data.message;
-
-          return [...prev.slice(0, -1), currentMessage];
+          return [...prev, { role: "ai", content: data.message }];
         });
-
-      } else if (data.status === "tool_called") {
-        console.log("tool_called", data);
-        setMessages(prev => [...prev, { role: "tool", tool_name: data.tool_name }]);
-      } else if (data.status === "start_chat") {
-        console.log("start_chat", data);
-        setMessages(prev => [...prev, { role: "ai", content: data.message, author: data.agent }]);
+      } else if (data.status === "tool_message") {
+        setMessages(prev => [...prev, { role: "tool", message: data.message, tool_name: data.name }]);
       } else if (data.status === "complete") {
         setIsProcessing(false);
       }
@@ -85,6 +79,9 @@ export default function ResearchTool() {
                 {messages.map((message, index) => (
                   <MessageComponent key={index} message={message} />
                 ))}
+                {isProcessing && (
+                  <div className="loader"></div>
+                )}
               </ScrollArea>
               
               <div className="flex gap-2">
@@ -95,7 +92,7 @@ export default function ResearchTool() {
                   placeholder="Ask a question..."
                   className="flex-grow"
                 />
-                <Button onClick={handleSend}>Send</Button>
+                <Button onClick={handleSend} disabled={isProcessing}>Send</Button>
               </div>
             </div>
           </TabsContent>
