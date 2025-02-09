@@ -11,6 +11,8 @@ import { ThemeToggle } from "./theme-toggle"
 import { Message } from '@/lib/types';
 import MessageComponent from './message-component';
 import LoaderMessage from './loader-message';
+
+
 export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
@@ -20,7 +22,6 @@ export default function ResearchTool() {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null)
 
   const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || '';
-  console.log("socketUrl", process.env);
 
   const {
     sendJsonMessage,
