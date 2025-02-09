@@ -2,4 +2,4 @@
 title: Welcome to your thought map
 ---
 
-Ever topic that you have researched with your assistant will be saved here. You can check the map of your thoughts that is generated on the right panel. You can also refer to the [[Criteria for Planet Habitability]] for more information on what makes a planet suitable for life.
+Ever topic that you have researched with your assistant will be saved here. You can check the map of your thoughts that is generated on the right panel. You can also refer to the [[Criteria for Planet Habitability]] for more information on what makes a planet suitable for life. Additionally, you may find it interesting to explore the [[Potential for Additional Planets in the HD 23472 System]] note. You might also want to look into the [[Formation Mechanisms of Super-Mercuries]] note for further insights. Furthermore, consider reviewing the [[11 Com b Overview]] note for a comprehensive understanding of the subject. Lastly, don't forget to check out the [[14 Herculis b Exoplanet Overview]] note for more details on this exoplanet. You may also want to check the [[16 Cyg B b Exoplanet Overview | source text]] for additional information.

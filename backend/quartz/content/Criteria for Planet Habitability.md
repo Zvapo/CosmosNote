@@ -6,7 +6,7 @@ The criteria that make a planet habitable include:
 
 3. **Geological Activity:** Active geology can help recycle nutrients and maintain a stable climate, which is beneficial for sustaining life.
 
-4. **Potential for Unexpected Environments:** Recent discoveries suggest that life can exist in extreme conditions, indicating that the criteria for habitability may be broader than previously thought.
+4. **Potential for Unexpected Environments:** Recent discoveries suggest that life can exist in extreme conditions, indicating that the criteria for habitability may be broader than previously thought. This is particularly relevant in systems like [[Potential for Additional Planets in the HD 23472 System | source text]] and may also relate to the [[Formation Mechanisms of Super-Mercuries]]. Additionally, these considerations are linked to the findings in [[11 Com b Overview]] and may also apply to [[14 Herculis b Exoplanet Overview | source text]]. Furthermore, the characteristics of [[16 Cyg B b Exoplanet Overview]] may provide additional insights into habitability.
 
 5. **Interactions with Other Celestial Bodies:** The presence of other planets and their interactions can also influence a planet's habitability.
 
