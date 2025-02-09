@@ -1,6 +1,6 @@
 "use client"
 
-import useWebSocket from 'react-use-websocket';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -78,8 +78,9 @@ export default function ResearchTool() {
                 {messages.map((message, index) => (
                   <MessageComponent key={index} message={message} />
                 ))}
+                
                 {isProcessing && (
-                  <div className="loader"></div>
+                  <div className="loader" />
                 )}
               </ScrollArea>
               
