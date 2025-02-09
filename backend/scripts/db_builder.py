@@ -5,21 +5,6 @@
 # import re
 # from tqdm import tqdm
 
-# # host:
-# # aws-0-eu-central-1.pooler.supabase.com
-
-# # port:
-# # 6543
-
-# # database:
-# # postgres
-
-# # user:
-# # postgres.ezlovmsmtdengapiohfz
-
-# # pool_mode:
-# # transaction
-
 
 
 # # --- CONFIGURATION ---
