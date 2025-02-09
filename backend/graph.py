@@ -49,3 +49,10 @@ class Graph:
             img.save("graphs_figs/graph.png")
             
         print("Graph visualization saved to graphs_figs/graph.png")
+
+    def tools_router(self, state: GraphState) -> str:
+        messages = state["messages"]
+        last_message = messages[-1]
+        if last_message.content == 'INFORMATION_GATHERED':
+            return "note_agent"
+        return "tools"
