@@ -33,15 +33,15 @@ export default function ResearchTool() {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string, followup_questions?: string[] };
+      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string, follow_up_questions?: string[] };
 
       if (data.status === "agent_message") {
         setMessages(prev => {
           return [...prev, { role: "ai", content: data.message }];
         });
 
-        if (data.followup_questions && data.followup_questions.length > 0) {
-          setFollowupQuestions(data.followup_questions);
+        if (data.follow_up_questions && data.follow_up_questions.length > 0) {
+          setFollowupQuestions(data.follow_up_questions);
         }
 
       } else if (data.status === "tool_message") {
