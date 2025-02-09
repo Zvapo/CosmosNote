@@ -44,12 +44,6 @@ class SessionEvents:
         "summary_agent": "Conclusion Writer"
     }
 
-    # @staticmethod
-    # def format_search_content(content):
-    #     if content.keys() == ["content", "url"]:
-    #         return f"{content["content"]} \n\n {content["url"]}"
-    #     else:
-    #         return content["content"]
         
     @staticmethod
     def format_event(message):
