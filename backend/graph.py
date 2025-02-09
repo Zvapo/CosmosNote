@@ -12,6 +12,7 @@ from tools.web_search_tool import web_search_tool
 from tools.vector_search_tool import vector_search_tool
 from agents.note_linking_agent import note_linking_agent
 from langchain_core.messages import HumanMessage
+from langgraph.checkpoint.memory import MemorySaver
 
 class Graph:
     def __init__(self):
@@ -35,7 +36,8 @@ class Graph:
         self.graph_builder.add_edge("summary_agent", END)
         
         # Compile the graph
-        self.graph = self.graph_builder.compile()
+        self.checkpointer = MemorySaver()
+        self.graph = self.graph_builder.compile(checkpointer=self.checkpointer)
     
 
     def save_graph_image(self):

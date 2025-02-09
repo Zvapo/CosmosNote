@@ -12,6 +12,10 @@ from state_managment import _create_session_file, _load_session_state, _save_ses
 # Load environment variables first
 load_dotenv()
 
+# Create sessions directory if it doesn't exist
+SESSIONS_DIR = Path("session_data")
+SESSIONS_DIR.mkdir(exist_ok=True)
+
 def _set_env(var: str):
     if not os.environ.get(var):
         os.environ[var] = getpass.getpass(f"{var}: ")
@@ -27,6 +31,18 @@ async def main():
     session_id = _generate_session_id()
     _create_session_file(session_id)
     
+
+    # Load or create session state
+    session_state = {
+        "user_prompt": "",
+        "messages": [],
+        "generated_note": None
+    }
+
+    config = {
+        "configurable": {"thread_id": str(uuid.uuid4())}
+    }
+
     async def process_message(user_input: str):
         session_state = _load_session_state(session_id)
         session_state["user_prompt"] = user_input

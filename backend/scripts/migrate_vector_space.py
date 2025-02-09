@@ -2,6 +2,7 @@ import sqlite3
 import numpy as np
 import psycopg2
 from psycopg2.extras import execute_values
+from tqdm import tqdm  # Pasek postępu
 
 # --- KONFIGURACJA SUPABASE (PostgreSQL) ---
 DB_NAME = "postgres"
@@ -35,25 +36,41 @@ CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
     id SERIAL PRIMARY KEY,
     filename TEXT,
     text_snippet TEXT,
-    vector FLOAT8[]
+    vector VECTOR(1536)  -- Obsługa nowego wymiaru dla text-embedding-ada-002
 )
 """)
 conn_pg.commit()
 
 # --- Przygotowanie danych do batch insert ---
 data = []
-for row in rows:
+print("🔄 Pobieranie danych z SQLite...")
+for row in tqdm(rows, desc="📂 Przetwarzanie wektorów", unit="vec"):
     filename, text_snippet, vector_blob = row
-    vector = np.frombuffer(vector_blob, dtype=np.float32).tolist()  # Konwersja na listę floatów (Postgres obsługuje FLOAT8[])
+
+    # Usunięcie NULL (\x00) z tekstu
+    text_snippet = text_snippet.replace("\x00", " ") if text_snippet else ""
     
+    # Konwersja z SQLite (binary blob) na listę floatów
+    vector = np.frombuffer(vector_blob, dtype=np.float32).tolist()
+    
+    # Sprawdzenie poprawności wymiaru (powinno być 1536D)
+    if len(vector) != 1536:
+        print(f"⚠️ Wektor dla {filename} ma niepoprawny wymiar: {len(vector)}")
+        continue  # Pomijamy błędne dane
+
     data.append((filename, text_snippet, vector))
 
 if data:
-    # Batch insert do Supabase (szybsze niż pojedyncze INSERTy)
+    print("🚀 Wysyłanie danych do Supabase...")
     query = f"INSERT INTO {TABLE_NAME} (filename, text_snippet, vector) VALUES %s"
-    execute_values(cursor_pg, query, data)
 
-    conn_pg.commit()
+    # Dodajemy pasek postępu dla batch insert
+    batch_size = 500  # Wstawiamy po 500 rekordów dla optymalizacji
+    for i in tqdm(range(0, len(data), batch_size), desc="📤 Wysyłanie batchy", unit="batch"):
+        batch = data[i:i+batch_size]
+        execute_values(cursor_pg, query, batch)
+        conn_pg.commit()
+
     print(f"✅ Przesłano {len(data)} wektorów do Supabase!")
 
 # --- Zamknięcie połączeń ---
