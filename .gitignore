@@ -2,7 +2,8 @@
 *node_modules/
 backend/quartz/docs/
 backend/quartz/public/
-backend/quartz/public/
+backend/quartz/content/*
+
 # Python
 __pycache__/
 *.py[cod]
