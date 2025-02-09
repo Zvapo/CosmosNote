@@ -55,7 +55,8 @@ async def main():
                 if event['event'] == TOOL_CALL_EVENT:
                     print('TOOL Called: ', event['name'])
                 elif event['event'] == MESSAGE_EVENT:
-                    print(event['data']['chunk'].content, flush=True)
+                    print(event)
+                    # print(event['data']['chunk'].content, flush=True)
             
             _save_session_state(session_state, session_id)
 

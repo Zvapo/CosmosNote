@@ -36,10 +36,12 @@ async def websocket_endpoint(websocket: WebSocket):
                             "tool_name": event['name']
                         })
                     elif event['event'] == 'on_chat_model_stream':
-                        await websocket.send_json({
-                            "status": "message",
-                            "message": event['data']['chunk'].content
-                        })
+                        chat_message = event['data']['chunk'].content
+                        if chat_message != '': # some chat messages are empty
+                            await websocket.send_json({
+                                "status": "message",
+                                "message": chat_message
+                            })
                 
                 
                 
