@@ -2,7 +2,7 @@
 
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -10,11 +10,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from "./theme-toggle"
 import { Message } from '@/lib/types';
 import MessageComponent from './message-component';
-
+import LoaderMessage from './loader-message';
 export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
+  
+  const scrollAreaRef = useRef<HTMLDivElement | null>(null)
 
   const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || '';
 
@@ -38,12 +40,18 @@ export default function ResearchTool() {
           return [...prev, { role: "ai", content: data.message }];
         });
       } else if (data.status === "tool_message") {
-        setMessages(prev => [...prev, { role: "tool", message: data.message, tool_name: data.name }]);
+        setMessages(prev => [...prev, { role: "tool", content: data.message, tool_name: data.name }]);
       } else if (data.status === "complete") {
         setIsProcessing(false);
       }
     }
   }, [lastJsonMessage]);
+
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSend = () => {
     if (input.trim()) {
@@ -74,13 +82,13 @@ export default function ResearchTool() {
 
           <TabsContent value="chat" className="h-[calc(100vh-9rem)]">
             <div className="h-full flex flex-col">
-              <ScrollArea className="flex-grow mb-4 border rounded-md p-4 !bg-[#fff0]">
+              <ScrollArea ref={scrollAreaRef} className="flex-grow mb-4 border rounded-md p-4 !bg-[#fff0]">
                 {messages.map((message, index) => (
                   <MessageComponent key={index} message={message} />
                 ))}
                 
                 {isProcessing && (
-                  <div className="loader" />
+                  <LoaderMessage />
                 )}
               </ScrollArea>
               
