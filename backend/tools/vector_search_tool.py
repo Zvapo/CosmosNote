@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-supabase_client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_API_KEy"))
+supabase_client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_API_KEY"))
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 
 @tool
