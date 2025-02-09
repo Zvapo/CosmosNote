@@ -7,6 +7,16 @@ The information available to the swarm is stored in a vector database, a SQL dat
 
 This way an end-user has access to a verified database of information about exoplanets, and a constantly updating knowledge graph allowing the user to monitor the links between researched topics and access past research results at any time.
 
+## Check out the website:
+
+![ExoMind Demo](https://exomind.space)
+
+## Check out the video of the demo:
+
+<!-- <video src="backend/graphs_figs/demo.mp4" width="320" height="240" controls>
+  Your browser does not support the video tag.
+</video> -->
+
 ## Agentic Architecture
 
 The swarm is made up of 4 main agents:
@@ -16,7 +26,8 @@ The swarm is made up of 4 main agents:
 4. **Note Linking Agent** - Links the notes in Obsidian Vault and the newly created note.
 3. **Summary Agent** - Summarises the research findings in a concise and readibly manner for the user.
 
-The swarm is build using LangGraph:
+**The swarm is build using LangGraph:**
+
 ![LangGraph Architecture](backend/graphs_figs/graph.png)
 
 ## Features
@@ -33,17 +44,7 @@ The swarm is build using LangGraph:
 git clone https://github.com/ExoMind-AI/ExoMind.git
 cd ExoMind/backend
 ```
-
-2. Navigate to the backend directory:
-```bash
-cd ExoMind/backend
-```
-
-3. Create and activate virtual environment:
-```bash
-python -m venv venv
-```
-
+(https://github.com/syrianah)
 ```bash
 # On Windows
 venv\Scripts\activate
@@ -88,10 +89,10 @@ http://localhost:8000/
 
 # The Team:
 
-- [@Vapo](https://github.com/Zvapo)
-- [@adam-m-lewis](https://github.com/adam-m-lewis)
-- [@george-h-king](https://github.com/george-h-king)
-- [@joel-j-b](https://github.com/joel-j-b)
+- [@Zvapo](https://github.com/Zvapo)
+- [@wojtasmat](https://github.com/wojtasmat)
+- [@JacobKaczmarek](https://github.com/JacobKaczmarek)
+- [@syrianah](https://github.com/syrianah)
 
 # License
 
