@@ -4,7 +4,10 @@
 # import os
 # import re
 # from tqdm import tqdm
+# from dotenv import load_dotenv
 
+# # 🔹 Załaduj zmienne środowiskowe z pliku .env
+# load_dotenv()
 
 
 # # --- CONFIGURATION ---
