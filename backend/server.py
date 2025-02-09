@@ -36,7 +36,7 @@ class SessionEvents:
         if isinstance(message, AIMessage):
             if message.content == '':
                 return None
-            if message.content == 'INFORMATION GATHERED':
+            if message.content == 'INFORMATION_GATHERED':
                 return None
             return {
                 "status": "agent_message",
