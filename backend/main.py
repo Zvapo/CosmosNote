@@ -8,13 +8,10 @@ import asyncio
 from agents.models import GraphState
 from langchain_core.messages import HumanMessage, AIMessage
 from state_managment import _create_session_file, _load_session_state, _save_session_state, _generate_session_id
+import uuid
 
 # Load environment variables first
 load_dotenv()
-
-# Create sessions directory if it doesn't exist
-SESSIONS_DIR = Path("session_data")
-SESSIONS_DIR.mkdir(exist_ok=True)
 
 def _set_env(var: str):
     if not os.environ.get(var):
@@ -31,6 +28,8 @@ async def main():
     session_id = _generate_session_id()
     _create_session_file(session_id)
     
+    TOOL_CALL_EVENT = 'on_tool_start'
+    MESSAGE_EVENT = 'on_chat_model_stream'
 
     # Load or create session state
     session_state = {
@@ -40,7 +39,7 @@ async def main():
     }
 
     config = {
-        "configurable": {"thread_id": str(uuid.uuid4())}
+        "configurable": {"thread_id": session_id}
     }
 
     async def process_message(user_input: str):
@@ -50,19 +49,14 @@ async def main():
         
         try:
             print("\nAssistant: ", end="", flush=True)  # Start response on new line
-            current_message = []
             
-            async for msg, metadata in graph.graph.astream(session_state, stream_mode="messages"):
-                if msg.content:
-                    # Print each new token/chunk without a newline
-                    print(msg.content, end="", flush=True)
-                    current_message.append(msg.content)
+            async for event in graph.graph.astream_events(session_state, config, version="v1"):
+                print('\nEvent: ', event['event'])
+                if event['event'] == TOOL_CALL_EVENT:
+                    print('TOOL Called: ', event['name'])
+                elif event['event'] == MESSAGE_EVENT:
+                    print(event['data']['chunk'].content, flush=True)
             
-            # Add a newline after the complete message
-            print("\n", flush=True)
-            
-            # Save the complete message to session state
-            session_state["messages"].append(AIMessage(content="".join(current_message)))
             _save_session_state(session_state, session_id)
 
         except Exception as e:

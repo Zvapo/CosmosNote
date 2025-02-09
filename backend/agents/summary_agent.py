@@ -12,7 +12,7 @@ async def summary_agent(state: GraphState, config: RunnableConfig):
     print('summary agent')
     system_prompt = SystemMessage(content=SystemPrompts.SummaryAgentPrompt)
 
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, tags=["summary_agent"])
     response = llm.invoke([system_prompt] + state["messages"])
     return Command(
         update={

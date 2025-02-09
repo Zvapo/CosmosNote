@@ -51,21 +51,6 @@ class Graph:
         print("Graph visualization saved to graphs_figs/graph.png")
 
 
-    async def stream_run(self, user_message: str):
-        """
-        Run the graph with streaming enabled and yield results
-        """
-        config = GraphState(user_prompt=user_message, messages=[HumanMessage(content=user_message)], search_results=[], note_titles=[], generated_note=None, research_results=[])
-
-        async for event in self.graph.astream(config):
-            if isinstance(event, dict) and "messages" in event:
-                # Extract the latest message
-                latest_message = event["messages"][-1]
-                yield latest_message
-            else:
-                yield event
-
-
     def tools_router(self, state: GraphState) -> str:
         messages = state["messages"]
         last_message = messages[-1]

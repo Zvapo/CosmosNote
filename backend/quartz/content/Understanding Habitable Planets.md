@@ -18,6 +18,8 @@ As research continues, the criteria for what makes a planet habitable are being 
 
 For more detailed information, you can refer to the [NASA SEEC page on habitability](https://seec.gsfc.nasa.gov/what_makes_a_planet_habitable.html).
 
+Additionally, for insights on how weather conditions might affect habitability, you can check the [[Current Weather in Poznan | weather conditions]]. 
+
 ---
 
 **Follow-Up Questions:**

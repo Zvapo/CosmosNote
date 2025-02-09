@@ -10,8 +10,32 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+<<<<<<< HEAD
 supabase_client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_API_KEY"))
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
+=======
+class SentenceEmbeddings(Embeddings):
+    def __init__(self):
+        self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        embeddings = self.model.encode(texts)
+        return embeddings.tolist()
+    
+    def embed_query(self, text: str) -> list[float]:
+        embedding = self.model.encode(text)
+        return embedding.tolist()
+
+
+supabase_client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_API_KEY"))
+embeddings = SentenceEmbeddings()
+vector_store = SupabaseVectorStore(
+    client=supabase_client,
+    embedding=embeddings,
+    table_name="document_vectors_test",
+    query_name="match_documents",
+)
+>>>>>>> 2f17913 (streaming to fe)
 
 @tool
 def vector_search_tool(query: str) -> str:

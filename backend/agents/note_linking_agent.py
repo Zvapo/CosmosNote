@@ -56,15 +56,14 @@ def note_linking_agent(state: GraphState):
 
     errors = []
     
-    llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, tags=["note_linking_agent"])
 
     response = llm.invoke([prompt] + state["messages"])
 
     try:
         write_note(state["generated_note"]["title"], response.content)
-    except Exception as e:
-        print("Error writing note: ", e)
-        errors.append(f"Error writing note {state["generated_note"]["title"]}: {e}")
+    except Exception as e:   
+        errors.append(f"Error writing note {state['generated_note']['title']}: {e}")
 
     for note in list_notes():
         existing_note = read_note(note)

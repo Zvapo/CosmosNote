@@ -10,8 +10,13 @@
 2. **TRAPPIST-1 System:**
    - While not the largest, the TRAPPIST-1 system is significant for having seven Earth-sized planets in the habitable zone, making it a prime target for the search for extraterrestrial life. See [[Understanding Habitable Planets | TRAPPIST-1 system]] for more information.
 
+<<<<<<< HEAD
 3. **Smallest Known Exoplanet:**
    - The search for habitable planets also includes the study of smaller exoplanets. For more information, see [[Smallest Known Exoplanet]].
+=======
+3. **Current Weather:**
+   - For the latest updates on the weather conditions in Poznan, refer to [[Current Weather in Poznan | weather updates]].
+>>>>>>> 2f17913 (streaming to fe)
 
 4. **Sources:**
    - [NASA Science - TRAPPIST-1](https://science.nasa.gov/exoplanets/trappist1/)

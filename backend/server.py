@@ -2,6 +2,9 @@ from fastapi import FastAPI, WebSocket
 from graph import Graph
 import json
 import asyncio
+from langchain_core.messages import HumanMessage
+import uuid
+
 
 app = FastAPI()
 
@@ -14,26 +17,35 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Wait for messages from the client
             data = await websocket.receive_json()
+            session_id = str(uuid.uuid4())
 
             await websocket.send_json(data)
-            
+            session_state = {
+                "user_prompt": data['user_prompt'], # need to get user prompt from
+                "messages": [HumanMessage(content=data['user_prompt'])]
+            }
+            config = {
+                "configurable": {"thread_id": session_id}
+            }
             # Stream the graph execution
             try:
-                async for message in graph.stream_run(data['user_prompt']):
-                    # Convert message to JSON-serializable format
-                    if hasattr(message, "to_dict"):
-                        message = message.to_dict()
-                    elif hasattr(message, "__dict__"):
-                        message = message.__dict__
-                        
-                    await websocket.send_json({
-                        "status": "streaming",
-                        "message": message
-                    })
+                async for event in graph.graph.astream_events(session_state, config, version="v1"):
+                    if event['event'] == 'on_tool_start':
+                        await websocket.send_json({
+                            "status": "tool_called",
+                            "tool_name": event['name']
+                        })
+                    elif event['event'] == 'on_chat_model_stream':
+                        await websocket.send_json({
+                            "status": "message",
+                            "message": event['data']['chunk'].content
+                        })
                 
-                # Send completion message
+                
+                
+                # Send completion message after graph execution
                 await websocket.send_json({
-                    "status": "complete"
+                     "status": "complete"
                 })
                 
             except Exception as e:

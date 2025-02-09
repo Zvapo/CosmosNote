@@ -12,7 +12,7 @@ Here are the key factors that make a planet habitable:
 
 6. **Magnetic Field**: A magnetic field can protect a planet's atmosphere from being stripped away by solar winds, which is vital for maintaining conditions suitable for life.
 
-These criteria are based on our understanding of life on Earth, but researchers are continually discovering new environments that may support life, which could expand the definition of habitability [[Criteria for Planet Habitability]]. Additionally, the size of a planet plays a significant role in its habitability, particularly in relation to its radius [[Largest Habitable Planets]]. For more insights, see [[Recent Research on Habitable Planets]]. For a deeper exploration of these concepts, refer to [[Understanding Habitable Planets | source text]]. 
+These criteria are based on our understanding of life on Earth, but researchers are continually discovering new environments that may support life, which could expand the definition of habitability [[Criteria for Planet Habitability]]. Additionally, the size of a planet plays a significant role in its habitability, particularly in relation to its radius [[Largest Habitable Planets]]. For more insights, see [[Recent Research on Habitable Planets]]. For a deeper exploration of these concepts, refer to [[Understanding Habitable Planets | source text]]. For information on the current conditions that may affect habitability, see [[Current Weather in Poznan]]. 
 
 ### Follow-Up Questions:
 1. What are some examples of exoplanets that are considered potentially habitable?
