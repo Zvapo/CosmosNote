@@ -13,9 +13,9 @@ This way an end-user has access to a verified database of information about exop
 
 ## Check out the video of the demo:
 
-<!-- <video src="backend/graphs_figs/demo.mp4" width="320" height="240" controls>
+<video src="demo.mp4" width="420" height="340" controls>
   Your browser does not support the video tag.
-</video> -->
+</video>
 
 ## Agentic Architecture
 
