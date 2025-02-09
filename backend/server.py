@@ -56,7 +56,8 @@ class SessionEvents:
             return {
                 "status": "tool_message",
                 "name": SessionEvents.TOOLS_DICT[message.name],
-                "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name]
+                "message": SessionEvents.TOOLS_MESSAGE_DICT[message.name],
+                "content": message.content
             }
 
         return None
