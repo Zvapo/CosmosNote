@@ -39,6 +39,7 @@ def write_note(file_name: str, content: str):
         CONTENT_DIR.mkdir(parents=True, exist_ok=True)
         
         file_path = CONTENT_DIR / f"{file_name}.md"
+        print("Writing to file: ", file_path)
         with open(file_path, "w") as f:
             f.write(content)
         return f"File {file_name}.md written successfully."
@@ -62,6 +63,7 @@ def note_linking_agent(state: GraphState):
     try:
         write_note(state["generated_note"]["title"], response.content)
     except Exception as e:
+        print("Error writing note: ", e)
         errors.append(f"Error writing note {state["generated_note"]["title"]}: {e}")
 
     for note in list_notes():
