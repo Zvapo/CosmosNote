@@ -39,7 +39,6 @@ def write_note(file_name: str, content: str):
         CONTENT_DIR.mkdir(parents=True, exist_ok=True)
         
         file_path = CONTENT_DIR / f"{file_name}.md"
-        print("Writing to file: ", file_path)
         with open(file_path, "w") as f:
             f.write(content)
         return f"File {file_name}.md written successfully."
@@ -51,14 +50,15 @@ def note_linking_agent(state: GraphState):
     """
     This agent is responsible for generating a note based on the research results and the user prompt.
     """
-    existing_notes = list_notes() 
-    prompt = SystemMessage(content=SystemPrompts.TaggingAgentPrompt.invoke({"existing_notes_content": existing_notes, "note": state["generated_note"]["content"]}))
-
     errors = []
+    existing_notes = list_notes() 
+    prompt = SystemPrompts.TaggingAgentPrompt.format(existing_notes_titles=existing_notes, note_content=state["generated_note"]["content"])
+    system_message = SystemMessage(content=prompt)
     
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, tags=["note_linking_agent"])
 
-    response = llm.invoke([prompt] + state["messages"])
+    response = llm.invoke([system_message] + state["messages"])
+    print('Post invoke')
 
     try:
         write_note(state["generated_note"]["title"], response.content)
@@ -67,7 +67,7 @@ def note_linking_agent(state: GraphState):
 
     for note in list_notes():
         existing_note = read_note(note)
-        prompt = f"""
+        prompt = SystemMessage(content=f"""
 
         Your job is to take the newly saved note title and check for it occurences in every note.
         If you find any similar or equal words in one of the existing notes, update it in the following way:
@@ -78,10 +78,12 @@ def note_linking_agent(state: GraphState):
             {state["generated_note"]["title"]}
         Output Requirements: 
            You should return the updated note content.
-        
-        """
 
-        response = llm.invoke(prompt)
+        Note to update:
+            {existing_note}
+        """)
+
+        response = llm.invoke([prompt])
 
         try:
             write_note(note, response.content)

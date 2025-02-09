@@ -51,7 +51,8 @@ class SystemPrompts:
 
             hand off the note to the Tagging Agent for further processing.
     """
-    TaggingAgentPrompt = PromptTemplate.from_template("""
+
+    TaggingAgentPrompt = """
         You are the Researcher Agent in a multi-agent AI system dedicated to answering user questions about habitable planets in the universe.
         System Workflow Overview
             User Query: The user asks a question about habitable planets.
@@ -66,10 +67,11 @@ class SystemPrompts:
                 if the word is similar to one of the exisiting notes titles, change the word to "[[ the matching exisiting notes titles | current note matchingword]]".
         You cannot edit other notes then the one you are given on this step.       
         Current note content: {note_content}
-        List of note titles: {existing_notes_content}                                              
+        List of note titles: {existing_notes_titles}                                              
         Output Requirements: 
            You should return the updated note content.                                                                                                                                                                          
-    """)
+    """
+
     SummaryAgentPrompt = """
         You are the Researcher Agent in a multi-agent AI system dedicated to answering user questions about habitable planets in the universe.
         System Workflow Overview
