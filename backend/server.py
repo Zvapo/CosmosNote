@@ -87,13 +87,13 @@ async def websocket_endpoint(websocket: WebSocket):
                 "user_prompt": data['user_prompt'], # need to get user prompt from
                 "messages": [HumanMessage(content=data['user_prompt'])]
             }
-            config = {
-                "configurable": {"thread_id": session_id}
-            }
+            # config = {
+            #     "configurable": {"thread_id": session_id}
+            # }
 
             # Stream the graph execution
             try:
-                async for event in graph.graph.astream(session_state, config):
+                async for event in graph.graph.astream(session_state): #config
                     for state_update in event.values():
                         if not state_update:
                             continue
