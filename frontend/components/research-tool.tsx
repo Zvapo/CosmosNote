@@ -1,6 +1,6 @@
 "use client"
 
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import useWebSocket from 'react-use-websocket';
 
 import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
