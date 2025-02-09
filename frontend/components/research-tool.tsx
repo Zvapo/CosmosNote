@@ -8,25 +8,20 @@ import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from "./theme-toggle"
-
-interface Message {
-  role: "user" | "ai"
-  content: string
-}
+import { Message } from '@/lib/types';
+import MessageComponent from './message-component';
 
 export default function ResearchTool() {
   const [messages, setMessages] = useState<Message[]>([])
+  const [response, setResponse] = useState<string>("")
   const [input, setInput] = useState("")
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || '';
 
   const {
     sendJsonMessage,
-    lastMessage,
-    sendMessage,
     lastJsonMessage,
-    readyState,
-    getWebSocket,
   } = useWebSocket(socketUrl, {
     onOpen: () => console.log('opened'),
     //Will attempt to reconnect on all close events, such as server shutting down
@@ -34,13 +29,32 @@ export default function ResearchTool() {
   });
 
   useEffect(() => {
-    if (lastMessage) {
-      console.log(lastMessage);
+    if (lastJsonMessage) {
+      const data = lastJsonMessage as { status: 'start_chat' | 'tool_called' | 'message' | 'complete', message: string, agent: string, tool_name?: string };
+
+      if (data.status === "message") {
+        setMessages(prev => {
+          const currentMessage = prev[prev.length - 1];
+          currentMessage.content = currentMessage.content + data.message;
+
+          return [...prev.slice(0, -1), currentMessage];
+        });
+
+      } else if (data.status === "tool_called") {
+        console.log("tool_called", data);
+        setMessages(prev => [...prev, { role: "tool", tool_name: data.tool_name }]);
+      } else if (data.status === "start_chat") {
+        console.log("start_chat", data);
+        setMessages(prev => [...prev, { role: "ai", content: data.message, author: data.agent }]);
+      } else if (data.status === "complete") {
+        setIsProcessing(false);
+      }
     }
-  }, [lastMessage]);
+  }, [lastJsonMessage]);
 
   const handleSend = () => {
     if (input.trim()) {
+      setIsProcessing(true);
       sendJsonMessage({
         user_prompt: input,
       });
@@ -69,15 +83,7 @@ export default function ResearchTool() {
             <div className="h-full flex flex-col">
               <ScrollArea className="flex-grow mb-4 border rounded-md p-4 !bg-[#fff0]">
                 {messages.map((message, index) => (
-                  <div key={index} className={`mb-4 flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div
-                      className={`max-w-[80%] rounded-lg p-3 ${
-                        message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                      }`}
-                    >
-                      {message.content}
-                    </div>
-                  </div>
+                  <MessageComponent key={index} message={message} />
                 ))}
               </ScrollArea>
               
