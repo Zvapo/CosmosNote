@@ -34,7 +34,7 @@ export default function ResearchTool() {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string, follow_up_questions?: string[] };
+      const data = lastJsonMessage as { status: 'agent_message' | 'tool_message' | 'complete', message: string, agent: string, name?: string, search_results?: string, follow_up_questions?: string[] };
 
       if (data.status === "agent_message") {
         setMessages(prev => {
@@ -46,7 +46,7 @@ export default function ResearchTool() {
         }
 
       } else if (data.status === "tool_message") {
-        setMessages(prev => [...prev, { role: "tool", content: data.message, tool_name: data.name }]);
+        setMessages(prev => [...prev, { role: "tool", content: data.message, search_results: data.search_results ? JSON.parse(data.search_results) : undefined, tool_name: data.name }]);
       } else if (data.status === "complete") {
         setIsProcessing(false);
       }
