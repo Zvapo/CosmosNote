@@ -14,13 +14,17 @@ async def research_agent(state: GraphState, config: RunnableConfig):
     system_prompt = SystemMessage(content=SystemPrompts.ResearcherAgentPrompt)
     
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
-
-    search_tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x['name'] == 'web_search_tool'])
-    tools = [web_search_tool, vector_search_tool, sql_tool] if search_tool_calls_count < 3 else [vector_search_tool, sql_tool]
+    tools = [web_search_tool, vector_search_tool, sql_tool]
     llm_w_tools = llm.bind_tools(tools)
 
-    messages = state["messages"]
-    response = await llm_w_tools.ainvoke([system_prompt] + messages)
+    print(state["messages"])
+    # count the number of web_search_tool tool calls
+    search_tool_calls_count = len([True for x in filter(lambda x: isinstance(x, AIMessage), state["messages"]) if x.tool_calls])
+
+    if search_tool_calls_count >= 3:
+        response = AIMessage(content="INFORMATION_GATHERED")
+    else:
+        response = await llm_w_tools.ainvoke([system_prompt] + state["messages"])
 
     return Command(
         update={
