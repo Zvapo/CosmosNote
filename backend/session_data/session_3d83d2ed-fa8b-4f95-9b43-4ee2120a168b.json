@@ -1,0 +1,11 @@
+{
+  "user_prompt": "what makes a planet habitable?",
+  "search_results": [],
+  "messages": [
+    {
+      "type": "human",
+      "content": "what makes a planet habitable?"
+    }
+  ],
+  "generated_note": null
+}
